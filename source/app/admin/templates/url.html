@@ -1,0 +1,82 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+echo $menu;
+?>
+
+
+
+{if $op=='content'}
+
+<div class="space">
+    <div class="subtitle">更新内容URL</div>
+<form method="post" name="myform" action="?file={$file}&action=content">
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+<tr class="altbg1">
+<td>
+<input type="hidden" name="dosubmit" value="1" /> 
+<input type="hidden" name="type" value="lastinput" /> 
+
+<?=form::select_cat('catcode','','','','','dearcms');?>（不选则生成更新） <br /><br />
+<font color="red">每轮更新 <input type="text" name="pagesize" value="100" size="4"> 条信息</font><br /><br />
+更新所有信息 <input type="button" name="dosubmit1" value=" 开始更新 " onclick="myform.type.value='all';myform.submit();"><br /><br />
+更新最新发布的 <input type="text" name="number" value="100" size="5"> 条信息 <input type="button" name="dosubmit2" value=" 开始更新 " onclick="myform.type.value='lastinput';myform.submit();"><br /><br />
+更新发布时间从 <?=form::date('fromdate', date('Y-n-j', mktime(0, 0, 0, date('n')-1, date('j'), date('Y'))))?> 到 
+<?=form::date('todate',date('Y-m-d',TIME))?> 的信息 
+<input type="button" name="dosubmit3" value=" 开始更新 " onclick="myshopform.type.value='date';myshopform.submit();"><br /><br />
+更新ID从 <input type="text" name="fromid" value="0" size="8"> 到 <input type="text" name="toid" size="8"> 的信息 <input type="button" name="dosubmit4" value=" 开始更新 " onclick="myform.type.value='id';myform.submit();">
+
+</td>
+</tr>
+</table>
+</form>
+</div>
+
+{elseif $op=='cat'}
+
+<div class="space">
+    <div class="subtitle">更新栏目URL</div>
+<form method="post" action="?file={$file}&action=cat">
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+<tr class="altbg1">
+<td>
+<?=form::select_cat('catcode');?>（不选则更新全部） <br /><br />
+<input type="submit" name="dosubmit" class="btn"  value=" 更新 " />
+</td>
+</tr>
+</table>
+</form>
+</div>
+
+
+{elseif $op=='shop'}
+
+<div class="space">
+    <div class="subtitle">更新商铺URL</div>
+<form method="post" name="myshopform" action="?file={$file}&action=shop">
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+<tr class="altbg1">
+<td>
+<input type="hidden" name="dosubmit" value="1" /> 
+<input type="hidden" name="type" value="lastinput" /> 
+
+<?=form::select_cat('catcode','','','','','shop');?>（不选则生成更新） <br /><br />
+<font color="red">每轮更新 <input type="text" name="pagesize" value="100" size="4"> 条信息</font><br /><br />
+更新所有信息 <input type="button" name="dosubmit1" value=" 开始更新 " onclick="myshopform.type.value='all';myshopform.submit();"><br /><br />
+更新最新发布的 <input type="text" name="number" value="100" size="5"> 条信息 <input type="button" name="dosubmit2" value=" 开始更新 " onclick="myshopform.type.value='lastinput';myshopform.submit();"><br /><br />
+更新发布时间从 <?=form::date('fromdate', date('Y-n-j', mktime(0, 0, 0, date('n')-1, date('j'), date('Y'))))?> 到 
+<?=form::date('todate',date('Y-m-d',TIME))?> 的信息 
+<input type="button" name="dosubmit3" value=" 开始更新 " onclick="myshopform.type.value='date';myshopform.submit();"><br /><br />
+更新ID从 <input type="text" name="fromid" value="0" size="8"> 到 <input type="text" name="toid" size="8"> 的信息 <input type="button" name="dosubmit4" value=" 开始更新 " onclick="myshopform.type.value='id';myshopform.submit();">
+
+</td>
+</tr>
+</table>
+</form>
+</div>
+
+{/if}
+
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+db类
+    get
+    get_row
+    get_var
+    get_col
+    insert
+    update
+    delete
+
+
+
+class类以dc开头
+model类以model开头
+app类以app开头
+
+加载类
+loadclass('classname');
+加载app的类
+loadclass('app:classname');

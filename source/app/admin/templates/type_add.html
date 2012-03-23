@@ -1,0 +1,38 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+?>
+{$menu}
+    <div class="space">
+        <div class="subtitle">添加类别</div>
+
+
+<form action="?file=<?=$file?>&action=<?=$action?>&module=<?=$module?>" method="post" name="myform">
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+	<tr class="altbg1"> 
+      <td><b>所属模型</b></td>
+      <td><?=$models?> </td>
+    </tr>
+	<tr class="altbg1"> 
+      <td><b>类别名称</b></td>
+      <td><input type="text" name="info[name]" size="30"><font color="red">*</font></td>
+    </tr>
+	<tr class="altbg1"> 
+      <td><b>类别描述</b></td>
+      <td><textarea name="info[description]" rows="2" cols="20" id="description" class="inputtext" style="height:100px;width:300px;"></textarea></td>
+    </tr>
+    <tr class="altbg1"> 
+      <td></td>
+      <td> 
+	  <input type="hidden" name="forward" value="?file=<?=$file?>&action=manage&module=<?=$module?>"> 
+	  <input type="submit" name="dosubmit"  class="btn" value=" 确定 "> 
+      &nbsp; <input type="reset" name="reset" class="btn"  value=" 清除 ">
+	  </td>
+    </tr>
+</table>
+</form>
+
+
+</div>
+</body>
+</html>

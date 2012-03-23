@@ -1,0 +1,125 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+?>
+
+<?=$menu?>
+
+<form action="?file=<?=$file?>&action=<?=$action?>" method="post" name="myform">
+<input type="hidden" name="forward" value="<?=$forward?>"> 
+<input type="hidden" name="blockid" value="<?=$blockid?>"> 
+<input type="hidden" name="blockname" value="<?=$name?>"> 
+<input type="hidden" name="info[isarray]" value="<?=$isarray?>"> 
+<input type="hidden" name="info[rows]" value="<?=$rows?>"> 
+
+
+
+    <div class="space">
+        <div class="subtitle">{$name} <font color="red">{areaname($areacode)}</font></div>
+
+{if isset($areacode)}
+    <input type="hidden" name="areacode" value="{$areacode}" />
+{else}
+        <div  class="subtitle" style="background:none;font-weight:300;">
+            {if $checkareacode}
+                所属地区：<?=form::select_area('areacode','','','',$areacode);?>
+            {elseif !$areacode}
+                <b>所属</b>：<input type="radio" name="type" value="1" checked />全国  &nbsp;&nbsp;&nbsp; 
+                <input type="radio" name="type" value="0" />地区：<?=form::select_area('areacode','','','',$areacode);?>
+            {/if}
+        </div>
+{/if}
+
+
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+<?php 
+if($isarray)
+{
+	if(!isset($rows)) $rows = 8;
+?>
+<tr class="altbg1"> 
+  <td width="10" id="th_id">ID</td>
+  <td width="*" id="th_title">标题</td>
+  <td width="200" id="th_url">链接</td>
+  <td width="150" id="th_thumb">缩略图</td>
+  <td width="70" id="th_date">日期</td>
+  <td width="200" id="th_description">摘要</td>
+</tr>
+<?php 
+for($i = 0; $i < $rows; $i++){
+?>
+<tr class="altbg1">
+  <td width="10"><?=($i+1)?></td>
+  <td width="*"><input type="text" name="data[<?=$i?>][title]" id="title_<?=$i?>" d="<?=$i?>" style="width:100%"></td>
+  <td width="200" class="align_c"><input type="text" name="data[<?=$i?>][url]" id="url_<?=$i?>"  size="30"></td>
+  <td width="150"><input type="text" name="data[<?=$i?>][thumb]" id="thumb_<?=$i?>" size="15" > 
+  <input name="thumb_<?=$i?>_aid" id="thumb_<?=$i?>_aid" type="hidden"><input type="button" name="thumb_upimage" value="上传" style="width:40px" onclick="javascript:openwinx('?file=upload&uploadtext=thumb_<?=$i?>','upload','450','350')"/></td>
+  <td width="70"><input type="text" name="data[<?=$i?>][date]" id="date_<?=$i?>" size="10"></td>
+  <td width="200"><textarea name="data[<?=$i?>][description]" id="description_<?=$i?>" style="width:100%;height:45px;"></textarea></td>
+</tr>
+<?php } ?>
+<?php 
+}else{	
+?>
+<tr class="altbg1"> 
+  <td>
+   <textarea name="data" id="data" style="width:100%;height:200px;padding:3px"></textarea>
+   <?=form::editor('data', 'introduce', '100%', '300')?>
+  </td>
+</tr>
+<?php 
+}	
+?>
+</table>
+
+</div>
+
+
+
+
+<div class="button_box" style="text-align:center">
+<input type="submit" name="dosubmit" value="更新碎片">&nbsp;&nbsp;
+<input type="reset" name="reset" value="重置">
+</div>
+</form>
+
+
+
+
+
+<script type="text/javascript">
+$().ready(function(){
+	$('.jqmWindow').jqm({overlay: 0	}).jqDrag('.title');
+	$('form').checkForm(1);
+});
+
+function dopreview()
+{
+	myform.action='?mod=<?=$mod?>&file=<?=$file?>&action=preview';
+	myform.target='preview';
+    myform.submit();
+	myform.action='?mod=<?=$mod?>&file=<?=$file?>&action=<?=$action?>';
+	myform.target='_self';
+	return true;
+}
+function loadwindow()
+{
+	window.document.getElementById('preview').height = window.frames["preview"].document.body.scrollHeight +20;
+	window.document.getElementById('preview').width = window.frames["preview"].document.body.scrollWidth;
+}
+function ke_competed(id)
+{
+    KE.plugin['source'].click(id);//切换到源码状态
+	//alert(id);
+}
+function insertText(text)
+{
+	myform.template.focus();
+    var str = document.selection.createRange();
+	str.text = text;
+}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+?>
+<body>
+<?=$menu?>
+
+    <div class="space">
+        <div class="subtitle"><?=$name?> 模块</div>
+
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+
+    <tr class="altbg1">
+      <td width="15%"><strong>模块名称</strong></td>
+      <td><?=$name?></td>
+    </tr>
+	<tr class="altbg1"> 
+      <td><strong>模块目录</strong></td>
+      <td><?=$module?></td>
+    </tr>
+	<tr class="altbg1"> 
+      <td><strong>核心模块</strong></td>
+      <td>{eval echo $iscore ? '是' : '否'}</td>
+    </tr>
+	<tr class="altbg1"> 
+      <td><strong>版本号</strong></td>
+      <td><?=$version?></td>
+    </tr>
+	<tr class="altbg1"> 
+      <td><strong>作者</strong></td>
+      <td><?=$author?></td>
+    </tr>
+	<tr class="altbg1"> 
+      <td><strong>E-mail</strong></td>
+      <td><a href="?mod=mail&file=send&email=<?=$email?>"><?=$email?></a></td>
+    </tr>
+	<tr class="altbg1"> 
+      <td><strong>网站地址</strong></td>
+      <td><a href="<?=$site?>" target="_blank"><?=$site?></a></td>
+    </tr>
+	<tr class="altbg1"> 
+      <td><strong>功能说明</strong></td>
+      <td><?=$introduce?></td>
+    </tr>
+	<tr class="altbg1"> 
+      <td><strong>许可协议</strong></td>
+      <td><?=$license?></td>
+    </tr>
+	<tr class="altbg1"> 
+      <td><strong>发布日期</strong></td>
+      <td><?=$publishdate?></td>
+    </tr>
+	<tr> 
+      <td><strong>安装日期</strong></td>
+      <td><?=$installdate?></td>
+    </tr>
+	<tr class="altbg1"> 
+      <td><strong>更新日期</strong></td>
+      <td><?=$updatedate?></td>
+    </tr>
+</table>
+
+</div>
+</body>
+</html>

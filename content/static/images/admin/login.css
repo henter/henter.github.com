@@ -1,0 +1,23 @@
+html, body {
+	background: #E6EFF7;
+	font: 14px Arial, Helvetica, sans-serif;
+}
+.login_table {
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #007399;
+  background: #FFFFFF;
+  color: #330000;
+}
+.table_title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFF;
+  background: #0099CC;
+}
+td {
+  padding: 10px;
+}
+a {
+  color: #0000FF;
+}

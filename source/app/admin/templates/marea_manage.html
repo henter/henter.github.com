@@ -1,0 +1,60 @@
+<?php
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+?>
+
+<form name="myform" method="post" action="?mod=<?=$mod?>&file=<?=$file?>&action=listorder">
+    <div class="space">
+        <div class="subtitle">{if $areacode}{areaname($areacode)}{/if} 商圈管理</div>
+
+<table cellpadding="0" cellspacing="0" class="maintable">
+<tr class="altbg1">
+<td width="5%">选择</td>
+<td width="5%">排序</td>
+<td>名称</td>
+<td>所属地区</td>
+<td width="30%">管理操作</td>
+</tr>
+{loop $mareas $info}
+<tr>
+<td><input type="checkbox" name="id[]" value="<?=$info['id']?>" /></td>
+<td class="align_c"><input type="text" name="listorder[{$info['id']}]" value="{$info['listorder']}" style="width:30px;"></td>
+<td {if $info[status]}style="color:red;"{/if}>{$info[areaname]}</td>
+<td>{areaname($info[areacode],1)}</td>
+<td class="align_c">
+
+<a href="?file={$file}&action=edit&id={$info[id]}&areacode={$info[areacode]}">修改</a> |
+{if $info[status]}
+<a href="?file={$file}&action=status&id={$info[id]}&status=0">关闭</a>
+{else}
+<a href="?file={$file}&action=status&id={$info[id]}&status=1" style="color:blue;">开通</a>
+{/if}
+ |
+<a href="javascript:confirmurl('?&file={$file}&action=delete&id={$info[id]}&areacode=<?=$info['areacode']?>&forward='+escape('<?=$forward?>'), '确认删除商圈“<?=$info['areaname']?>”吗')">删除</a>
+</td>
+</tr>
+{/loop}
+</table>
+
+<div class="button_box">
+<span style="width:60px"><a href="###" onclick="javascript:$('input[type=checkbox]').attr('checked', true)">全选</a>/<a href="###" onclick="javascript:$('input[type=checkbox]').attr('checked', false)">取消</a></span>
+
+	 <input name="dosubmit" type="submit"  class="btn" value=" 排序 " /> 
+	 <input  type="button"  class="btn" value="添加商圈" onclick="redirect('?file={$file}&action=add&areacode={$areacode}&forward={urlencode(URL)}')" />
+
+		<input type="button" class="btn" name="move" value=" 开通 " onclick="myform.action='?mod=<?=$mod?>&file=<?=$file?>&action=status&status=1&forward=<?=urlencode(URL)?>';myform.submit();"> 
+		<input type="button" class="btn" name="move" value=" 关闭 " onclick="myform.action='?mod=<?=$mod?>&file=<?=$file?>&action=status&status=0&forward=<?=urlencode(URL)?>';myform.submit();"> 
+		<input type="button" class="btn" name="move" value=" 删除 " onclick="myform.action='?mod=<?=$mod?>&file=<?=$file?>&action=delete&forward=<?=urlencode(URL)?>';myform.submit();"> 
+	 <input name="goback" type="button"  class="btn" value="返回" onclick="history.back();" />
+
+</div>
+<div id="pages">
+	<?=$marea->pages?>
+</div>
+
+
+</div>
+</form>
+
+</body>
+</html>

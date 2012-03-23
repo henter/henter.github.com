@@ -1,0 +1,76 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+?>
+{$menu}
+    <div class="space">
+        <div class="subtitle">修改碎片</div>
+
+
+<form action="?file=<?=$file?>&action=<?=$action?>" method="post" name="myform">
+<input type="hidden" name="forward" value="?file=block&action=update&blockid=<?=$blockid?>&forward=<?=urlencode($forward)?>"> 
+<input type="hidden" name="blockid" value="<?=$blockid?>"> 
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+	<tr class="altbg1">
+      <td width="30%"><font color="red">*</font> <b>碎片名称</b></td>
+      <td><input type="text" name="info[name]" size="50" value="<?=$name?>"></td>
+    </tr>
+	<tr class="altbg1"> 
+      <td><font color="red">*</font> <b>网页标识</b><br />调用碎片页面的网页标识（pageid）</td>
+      <td><?=$pageid?></td>
+    </tr>
+
+	<tr class="altbg1"> 
+      <td><font color="red">*</font> <b>数据格式</b></td>
+      <td>
+	  <input type="radio" name="info[isarray]" id="isarray" value="1" <?=$isarray ? 'checked' : ''?> onclick="$('#data_rows').show();"> 格式化（输入标题、缩略图、简介、日期、链接）<br/>
+	  <input type="radio" name="info[isarray]" id="isarray" value="0" <?=$isarray ? '' : 'checked'?> onclick="$('#data_rows').hide();"> 非格式化（输入html代码）
+	  </td>
+    </tr>
+	<tbody id="data_rows" style="display: <?=$isarray ? '' : 'none'?>">
+	<tr class="altbg1"> 
+      <td><font color="red">*</font> <b>数据行数</b></td>
+      <td><input type="text" name="info[rows]" id="rows" size="5" value="<?=$rows?>"> 行</td>
+    </tr>
+	<tr> 
+      <td><font color="red">*</font> <b>默认模板代码</b></td>
+      <td><textarea name="info[template]" id="template" style="width:100%;height:120px;"><?=$template?></textarea>
+	<span style="height:25px"><input type="button" value="&#123;loop *&#125;" title="点击插入" style="width:60px" onClick="javascript:insertText('&#123;loop $data $n $r&#125;')" /></span>
+	<span style="height:25px"><input type="button" value="&#123;/loop&#125;" title="点击插入" style="width:60px" onClick="javascript:insertText('&#123;/loop&#125;')" /></span>
+	<span style="height:25px"><input type="button" value="碎片名称" title="点击插入" style="width:60px" onClick="javascript:insertText('&#123;$name&#125;')" /></span>
+	<span style="height:25px"><input type="button" value="标题" title="点击插入" style="width:60px" onClick="javascript:insertText('&#123;$r[title]&#125;')" /></span>
+	<span style="height:25px"><input type="button" value="URL" title="点击插入" style="width:60px" onClick="javascript:insertText('&#123;$r[url]&#125;')" /></span>
+	<span style="height:25px"><input type="button" value="缩略图" title="点击插入" style="width:60px" onClick="javascript:insertText('&#123;$r[thumb]&#125;')" /></span>
+	<span style="height:25px"><input type="button" value="日期" title="点击插入" style="width:60px" onClick="javascript:insertText('&#123;$r[date]&#125;')" /></span>
+	<span style="height:25px"><input type="button" value="简介" title="点击插入" style="width:60px" onClick="javascript:insertText('&#123;$r[description]&#125;')" /></span>
+      </td>
+    </tr>
+	</tbody>
+
+
+
+    <tr class="altbg1"> 
+      <td></td>
+      <td>
+	  <input type="submit" name="dosubmit" value=" 提交 "> 
+      &nbsp; <input type="reset" name="reset" value=" 清除 ">
+	  </td>
+    </tr>
+</table>
+</form>
+<script type="text/javascript">
+$().ready(function(){
+	$('form').checkForm(1);
+});
+
+function insertText(text)
+{
+	myform.template.focus();
+    var str = document.selection.createRange();
+	str.text = text;
+}
+
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+?>
+<body>
+<?=$menu?>
+    <div class="space">
+        <div class="subtitle">模块管理</div>
+
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+
+    <tr class="altbg1">
+        <td><strong>模块名称</strong></td>
+        <td width="130"><strong>模块目录</strong></td>
+        <td width="100"><strong>版本号</strong></td>
+        <td width="80"><strong>安装日期</strong></td>
+        <td width="80"><strong>更新日期</strong></td>
+        <td width="220"><strong>管理操作</strong></td>
+    </tr>
+<?php 
+if(is_array($data)){
+	foreach($data as $module){
+		$mod_root = DC_ROOT.$MODULE[$module['module']]['path'];
+?>
+<tr class="altbg1">
+    <td class="align_l"><a href="?file=module&action=view&module=<?=$module['module']?>" title="发布日期：<?=$module['publishdate']?><?="\n"?>安装日期：<?=$module['installdate']?>"><?=$module['name']?></a></td>
+    <td class="align_l"><?=$module['module']?></td>
+    <td class="align_c"><?=$module['version']?></td>
+    <td class="align_c"><?=$module['installdate']?></td>
+    <td class="align_c"><?=$module['updatedate']?></td>
+    <td class="align_c">
+    <a href="?file=module&action=faq&module=<?=$module['module']?>" title="点击查看使用帮助">帮助</a> | 
+    <?php if(file_exists($mod_root.'admin/setting.inc.php')){ ?>
+    <a href="?mod=<?=$module['module']?>&file=setting">配置</a>
+    <?php }else{ ?>
+    <font color="#cccccc">配置</font>
+    <?php } ?> | 
+
+    <?php
+    if($module['iscore'])
+    {
+        echo "<font color='#cccccc'>禁止</font> | <font color='#cccccc'>禁止</font>";
+    }
+    else 
+    {
+        if($module['disabled'])	echo "<a href=\"?file=module&action=disable&value=0&module=".$module['module']."\" style='color:green;'>启用</a> | ";
+        else echo "<a href=\"?file=module&action=disable&value=1&module=".$module['module']."\">禁用</a> | ";
+    ?>
+    <a href="javascript:if(confirm('确认卸载该模块吗？将会删除该模块所有数据')) location='?file=module&action=uninstall&module=<?=$module['module']?>'">卸载</a>
+    <? } ?>
+    </td>
+</tr>
+<?php 
+	}
+}
+?>
+</table>
+
+
+</div>
+</body>
+</html>

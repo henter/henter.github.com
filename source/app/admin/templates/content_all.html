@@ -1,0 +1,129 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+?>
+
+
+<?=$menu?>
+
+    <div class="space">
+        <div class="subtitle">信息查询</div>
+        
+        
+<form name="search" method="get" action="">
+<input type="hidden" name="mod" value="<?=$mod?>"> 
+<input type="hidden" name="file" value="<?=$file?>"> 
+<input type="hidden" name="action" value="<?=$action?>"> 
+<table cellpadding="0" cellspacing="0" class="maintable">
+
+<tr class="altbg1">
+<td class="align_c">
+<?=form::select_cat('catcode', 'catcode', '不限栏目', '',$catcode,'dearcms')?>  
+<?//form::select_type('dearcms', 'typeid','typeid','类别', $typeid)?> 
+<input type="hidden" name="areacode" id="areacode" value=""> 
+<span id="load_areacode"></span>
+<a href="javascript:areacode_reload();">重选</a>
+<script type="text/javascript">
+function areacode_load(id)
+{
+	$.get('load.php', { field: 'areacode', id: id },
+		  function(data){
+			$('#load_areacode').append(data);
+		  });
+}
+function areacode_reload()
+{
+	$('#load_areacode').html('');
+	areacode_load(0);
+}
+areacode_load(0);
+</script>
+&nbsp;
+<select name='field'>
+<option value='title' <?=$field == 'title' ? 'selected' : ''?> >标题</option>
+<option value='username' <?=$field == 'username' ? 'selected' : ''?> >用户名</option>
+<option value='userid' <?=$field == 'userid' ? 'selected' : ''?> >用户ID</option>
+<option value='contentid' <?=$field == 'contentid' ? 'selected' : ''?> >ID</option>
+</select>
+<input type="text" name="q" value="<?=$q?>" size="15" />&nbsp;
+发布时间：<?=form::date('inputdate_start')?> - <?=form::date('inputdate_end')?>&nbsp;
+<input type="submit" name="dosubmit" value=" 查询 " />
+</td>
+</tr>
+</table>
+</form>
+</div>
+
+
+    <div class="space">
+        <div class="subtitle">
+<?php
+if($status==1000){
+echo '审核信息管理';
+}elseif($status==0) {
+echo '回收站';
+}else{
+echo '信息管理';
+}
+?>
+        </div>
+
+
+
+<form name="myform" method="post" action="">
+<table cellpadding="0" cellspacing="0" class="maintable">
+<tr class="altbg1">
+<td width="30">选中</td>
+<td width="40">排序</td>
+<td width="40">ID</td>
+<td>标题</td>
+<td width="80">状态</td>
+<td width="100">栏目</td>
+<td width="70">录入者</td>
+<td width="100">更新时间</td>
+<td width="170">管理操作</td>
+</tr>
+<?php 
+if(is_array($infos)){
+	foreach($infos as $info){
+?>
+<tr class="altbg1">
+<td><input type="checkbox" name="contentid[]" value="<?=$info['contentid']?>" id="content_<?=$info['contentid']?>" /></td>
+<td><input type="text" name="listorders[<?=$info['contentid']?>]" value="<?=$info['listorder']?>" size="3" /></td>
+<td><?=$info['contentid']?></td>
+<td><a href="show.php?id={$info[contentid]}" target="_blank"><?=$info['title']?></a>  <?=$info['thumb'] ? '<font color="red">图</font>' : ''?>&nbsp;<?=$info['elite']?'<font color="green">荐</font>': ''?>&nbsp;<?=$info['typeid']?'<font color="blue">类</font>': ''?></td>
+<td class="align_c"><?=$STATUS[$info['status']]?></td>
+<td class="align_c"><a href="<?=$CAT[$info['catcode']]['url']?>" target="_blank"><?=$CAT[$info['catcode']]['catname']?></a></td>
+<td class="align_c"><a href="?mod=member&file=member&action=view&userid=<?=$info['userid']?>"><?=$info['username']?></a></td>
+<td class="align_c"><?=date('Y-m-d H:i', $info['updatetime'])?></td>
+<td class="align_c">
+<a href="show.php?id={$info[contentid]}"  target="_blank">查看</a> | 
+<a href="?file=content&action=edit&catcode=<?=$info[catcode]?>&contentid=<?=$info['contentid']?>">修改</a>
+<!--
+<?php if(isset($MODULE['comment'])){ ?> | <a href="?mod=comment&file=comment&keyid=dearcms-content-title-<?=$info['contentid']?>">评论</a> <?php } ?>
+-->
+</td>
+</tr>
+<?php 
+	}
+}
+?>
+</table>
+
+<div class="button_box">
+<span style="width:60px"><a href="###" onclick="javascript:$('input[type=checkbox]').attr('checked', true)">全选</a>/<a href="###" onclick="javascript:$('input[type=checkbox]').attr('checked', false)">取消</a></span>
+		<input type="button" name="listorder" value=" 排序 " onclick="myform.action='?file=<?=$file?>&action=listorder&catcode=<?=$catcode?>&processid=<?=$processid?>&forward=<?=urlencode(URL)?>';myform.submit();"> 
+		<input type="button" name="delete" value=" 删除 " onclick="myform.action='?file=<?=$file?>&action=<?=$status==0?'delete':'cancel'?>&catcode=<?=$catcode?>&processid=<?=$processid?>&forward=<?=urlencode(URL)?>';myform.submit();"> 
+
+<!--
+		<input type="button" name="pass" value="终审通过"  onclick="myform.action='?file=<?=$file?>&action=pass&catcode=<?=$catcode?>&forward=<?=urlencode(URL)?>';myform.submit();"> 
+-->
+
+</div>
+<div id="pages"><?=$c->pages?></div>
+
+</form>
+
+</div>
+</body>
+</html>

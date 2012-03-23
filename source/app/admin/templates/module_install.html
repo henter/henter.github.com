@@ -1,0 +1,45 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+?>
+
+
+    <div class="space">
+        <div class="subtitle">第一步：填写模块目录</div>
+<form action="" method="post" name="myform">
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+
+	<tr class="altbg1"> 
+      <td><strong>模块目录</strong></td>
+      <td>
+          <input type="text" name="installdir" size="30">
+       </td>
+    </tr>
+    <tr class="altbg1"> 
+      <td></td>
+      <td> 
+	  <input type="submit" name="confirm"  class="btn" value=" 下一步 "> 
+      &nbsp; <input type="button" name="cancel"  class="btn" value=" 取消安装 " onClick="window.location='?file=module'">
+	  </td>
+    </tr>
+</table>	
+</form>
+
+</div>
+
+
+    <div class="space">
+        <div class="subtitle">操作说明</div>
+        
+<table cellpadding="2" cellspacing="1" class="maintable">
+
+  <tr> 
+      <td>注意：安装模块前，请确认将该模块文件夹上传至服务器上，模块位于网站根目录。<br/>
+      模块目录填写的是该模块相对于根目录的路径，如友情链接模块：link，聚会模块：party。
+       </td>
+    </tr>
+  </table>
+
+</div>
+</body>
+</html>

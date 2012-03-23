@@ -1,0 +1,60 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+?>
+
+
+
+
+
+
+<div class="space">
+    <div class="subtitle">管理员列表</div>
+
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+    <tr class="altbg1">
+        <td width="130"><b>用户名</b></td>
+        <td width="130"><b>E-mail</b></td>
+        <td width="130"><b>管辖地区</b></td>
+        <td><b>管理组</b></td>
+        <td><b>登录IP</b></td>
+        <td><b>最后登录</b></td>
+        <td width="100"><b>登录次数</b></td>
+        <td><b>管理操作</b></td>
+    </tr>
+
+{loop $admins $info}
+<tr class="altbg1">
+    <td class="align_l">{$info[username]}</td>
+    <td class="align_l">{$info[email]}</td>
+    <td class="align_c">{if !$info[areacode]}全国{else}{php echo areaname($info[areacode],1);}{/if}</td>
+    <td class="align_c">{$ROLE[$info[roleid]][rolename]} {if $info[parentid]}(<font color=blue>{adminname($info[parentid])}的子管理员</font>){/if}</td>
+    <td class="align_c"><a href="http://tool.115.com/ip/{$info[loginip]}" target="_blank">{$info[loginip]}</a></td>
+    <td class="align_c">{if $info[logintime]}{date('Y-m-d H:i:s',$info[logintime])}{/if}</td>
+    <td class="align_c">{$info[logincount]}</td>
+    <td class="align_c">
+    
+    {if $info[is_founder] && $a_adminid != $info[id]}
+            {if get_cookie('a_adminid') == $info[id]} 
+            <a href="?file={$file}&action=edit&id={$info[id]}">修改</a> | 
+            {else}
+            修改 | 
+            {/if}
+         删除 
+    {else}
+        <a href="?file={$file}&action=edit&id={$info[id]}">修改</a> | 
+        <a href="#" onClick="javascript:confirmurl('?file={$file}&action=delete&id={$info[id]}', '是否删除该管理员？')" >删除</a>
+     {/if}
+    </td>
+</tr>
+{/loop}
+
+</table>
+
+
+</div>
+
+
+
+</body>
+</html>

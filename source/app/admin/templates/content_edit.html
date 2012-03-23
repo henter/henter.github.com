@@ -1,0 +1,108 @@
+<?php
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+?>
+
+
+<?=$menu?>
+<div class="tag_menu" style="margin-top:10px;">
+<ul>
+  <li><a href="###" id='TabTitle0' onclick='ShowTabs(0)' class="selected">基本信息</a></li>
+  <li><a href="###" id='TabTitle1' onclick='ShowTabs(1)'>高级设置</a></li>
+</ul></div>
+
+<form action="?file=<?=$file?>&action=<?=$action?>&contentid=<?=$contentid?>" method="post" name="myform" enctype="multipart/form-data">
+<div id="Tabs0" style="display:">
+<table cellpadding="0" cellspacing="0" class="maintable">
+{if $shopid}
+	<tr>
+      <td width="20%"><b>所属商铺</b></td>
+      <td>{shopname($shopid)}
+      </td>
+    </tr>
+{/if}
+
+ <?php
+ foreach($forminfos['base'] as $field=>$info)
+ {
+       if($catcode && $field=='catcode'){
+        echo "<tr><td width='20%'><b>栏目</b></td><td>".catname($catcode,1)." <input type='hidden' name='info[catcode]' value='$catcode' ></td></tr>";
+     }else{
+ ?>
+	<tr>
+      <td width="20%"><?php if($info['star']){ ?> <font color="red">*</font><?php } ?> <b><?=$info['name']?></b><br />
+	  <?=$info['tips']?>
+	  </td>
+      <td><?=$info['form']?></td>
+    </tr>
+<?php
+    }
+}
+?>
+<tr>
+      <td width="20%"><b>状态</b><br />
+	  </td>
+      <td>
+	  <label><input type="radio" name="status" value="99" checked/> 发布</label>
+	  <label><input type="radio" name="status" value="3"> 审核</label>
+	  <label><input type="radio" name="status" value="2"> 草稿</label>
+	  </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+	  <input type="hidden" name="forward" value="<?=$forward?>">
+	  <input type="submit" name="dosubmit" value=" 确定 ">
+      &nbsp; <input type="button" name="preview" value=" 预览 " onclick="preview_content();">
+	  &nbsp; <input type="reset" name="reset" value=" 清除 ">
+	  </td>
+    </tr>
+</table>
+</div>
+<div id='Tabs1' style='display:none'>
+<table cellpadding="0" cellspacing="0" class="maintable">
+  <?php
+	if(is_array($forminfos['senior']))
+	{
+	 foreach($forminfos['senior'] as $field=>$info)
+	 {
+	 ?>
+		<tr>
+		  <td width="20%"><?php if($info['star']){ ?> <font color="red">*</font><?php } ?> <b><?=$info['name']?></b> <br />
+		  <?=$info['tips']?>
+		  </td>
+		  <td><?=$info['form']?> </td>
+		</tr>
+	<?php
+	} }
+?>
+    <tr>
+      <td></td>
+      <td>
+	  <input type="hidden" name="catcode" value="<?=$catcode?>">
+	  <input type="hidden" name="forward" value="<?=$forward?>">
+	  <input type="submit" name="dosubmit" value=" 确定 ">
+<!--	  &nbsp; <input type="button" name="preview" value=" 预览 " onclick="preview_content();">  -->
+	  &nbsp; <input type="reset" name="reset" value=" 清除 ">
+	  </td>
+    </tr>
+</table>
+</div>
+</form>
+<script LANGUAGE="javascript">
+<!--
+function preview_content()
+{
+	myform.action = "preview.php";
+	myform.target = "_blank"; 
+	myform.submit(); 
+	myform.action = "?file=<?=$file?>&action=<?=$action?>&catcode=<?=$catcode?>&modelid=<?=$modelid?>";
+	myform.target="_self";
+}
+$().ready(function() {
+	  $('form').checkForm(1);
+	});
+//-->
+</script>
+</body>
+</html>

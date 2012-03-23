@@ -1,0 +1,47 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+?>
+{$menu}
+    <div class="space">
+        <div class="subtitle">碎片管理</div>
+
+
+<form method="post" name="myform" action="">
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+<tr class="altbg1">
+<td width="5%">选中</td>
+<td>碎片名称</td>
+<td width="10%">类型</td>
+<td width="25%">调用代码</td>
+<td width="25%">管理操作</td>
+</tr>
+{loop $data $r}
+<tr class="altbg1">
+<td class="align_c"><input type="checkbox" name="blockid[<?=$r['blockid']?>]" value="<?=$r['blockid']?>" id="block_<?=$r['blockid']?>" /></td>
+<td><?=$r['name']?></td>
+<td>{if $r[isarray]}列表{else}HTML代码{/if}</td>
+<td>{block('{$r[pageid]}')}</td>
+<td class="align_c">
+<a href="?file=<?=$file?>&action=adddata&blockid=<?=$r['blockid']?>">添加数据</a> | 
+<a href="?file=<?=$file?>&action=datalist&blockid=<?=$r['blockid']?>">数据列表</a>
+{if $_roleid==4}
+ | 
+<a href="?file=<?=$file?>&action=edit&blockid=<?=$r['blockid']?>">修改</a> | 
+<a href="?mod=<?=$mod?>&file=<?=$file?>&action=disable&blockid=<?=$r['blockid']?>&disabled=<?=($r['disabled']==1 ? 0 : 1)?>"><?=($r['disabled']==1 ? '<font color="red">启用</font>' : '禁用')?></a> | 
+<a href="javascript:confirmurl('?file=<?=$file?>&action=delete&blockid=<?=$r['blockid']?>','确认要删除‘<?=$r['name']?>’吗？')">删除</a>
+{/if}
+</td>
+</tr>
+{/loop}
+</table>
+{if $_roleid==4}
+<div class="button_box"><input type="button" name="dodelete" value=" 删除 " onclick="myform.action='?mod=<?=$mod?>&file=<?=$file?>&action=delete&forward=<?=urlencode(URL)?>';myform.submit();"> 
+{/if}
+<input type="button" name="dorefresh" value=" 刷新碎片 " onclick="myform.action='?mod=<?=$mod?>&file=<?=$file?>&action=refresh&forward=<?=urlencode(URL)?>';myform.submit();"/></div>
+<div id="pages"><?=$block->pages?></div>
+</form>
+
+</div>
+</body>
+</html>

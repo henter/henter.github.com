@@ -1,0 +1,140 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+echo $menu;
+?>
+
+{if $op=='index'}
+<div class="space">
+    <div class="subtitle">生成首页</div>
+<form method="post" action="?file={$file}&action=index">
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+<tr class="altbg1">
+<td>
+<?=form::select_area('areacode');?>（不选则生成全部地区） <br /><br />
+
+<input type="submit" name="dosubmit" class="btn"  value=" 生成 " />
+</td>
+</tr>
+</table>
+</form>
+</div>
+
+{elseif $op=='cat'}
+
+<div class="space">
+    <div class="subtitle">生成文章栏目页</div>
+<form method="post" action="?file={$file}&action=_area&module=dearcms&creatarea=1">
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+<tr class="altbg1">
+<td>
+<?=form::select_area('select_areacode');?>（不选则生成全部地区） <br /><br />
+<?=form::select_cat('select_catcode','','','','','dearcms');?>（不选则生成全部栏目） <br /><br />
+每轮更新页数 
+<input type="text" name="pagesize" size="5" value="50" /> <br /><br />
+<input type="submit" name="dosubmit" class="btn"  value=" 生成 " />
+</td>
+</tr>
+</table>
+</form>
+</div>
+
+{elseif $op=='show'}
+
+<div class="space">
+    <div class="subtitle">生成文章内容页</div>
+<form method="post" name="myform" action="?file={$file}&action=show">
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+<tr class="altbg1">
+<td>
+<input type="hidden" name="dosubmit" value="1" /> 
+<input type="hidden" name="type" value="lastinput" /> 
+
+<?=form::select_cat('catcode','','','','','dearcms');?>（不选则生成全部） <br /><br />
+<font color="red">每轮更新 <input type="text" name="pagesize" value="100" size="4"> 条信息</font><br /><br />
+更新所有信息 <input type="button" name="dosubmit1" value=" 开始更新 " onclick="myform.type.value='all';myform.submit();"><br /><br />
+更新最新发布的 <input type="text" name="number" value="100" size="5"> 条信息 <input type="button" name="dosubmit2" value=" 开始更新 " onclick="myform.type.value='lastinput';myform.submit();"><br /><br />
+更新发布时间从 <?=form::date('fromdate', date('Y-n-j', mktime(0, 0, 0, date('n')-1, date('j'), date('Y'))))?> 到 
+<?=form::date('todate',date('Y-m-d',TIME))?> 的信息 
+<input type="button" name="dosubmit3" value=" 开始更新 " onclick="myshopform.type.value='date';myshopform.submit();"><br /><br />
+更新ID从 <input type="text" name="fromid" value="0" size="8"> 到 <input type="text" name="toid" size="8"> 的信息 <input type="button" name="dosubmit4" value=" 开始更新 " onclick="myform.type.value='id';myform.submit();">
+
+</td>
+</tr>
+</table>
+</form>
+</div>
+
+{elseif $op=='shoplist'}
+
+<div class="space">
+    <div class="subtitle">生成商铺栏目页</div>
+<form method="post" action="?file={$file}&action=_area&module=shop&creatarea=1">
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+<tr class="altbg1">
+<td>
+<?=form::select_area('select_areacode');?>（不选则生成全部地区） <br /><br />
+<?=form::select_cat('select_catcode','','','','','shop');?>（不选则生成全部栏目） <br /><br />
+每轮更新页数 
+<input type="text" name="pagesize" size="5" value="50" /> <br /><br />
+<input type="submit" name="dosubmit" class="btn"  value=" 生成 " />
+</td>
+</tr>
+</table>
+</form>
+</div>
+
+
+{elseif $op=='shopshow'}
+
+<div class="space">
+    <div class="subtitle">生成商铺页</div>
+<form method="post" name="myshopform" action="?file={$file}&action=shopshow">
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+<tr class="altbg1">
+<td>
+<input type="hidden" name="dosubmit" value="1" /> 
+<input type="hidden" name="type" value="lastinput" /> 
+
+<?=form::select_cat('catcode','','','','','shop');?>（不选则生成全部） <br /><br />
+<font color="red">每轮更新 <input type="text" name="pagesize" value="100" size="4"> 条信息</font><br /><br />
+更新所有信息 <input type="button" name="dosubmit1" value=" 开始更新 " onclick="myshopform.type.value='all';myshopform.submit();"><br /><br />
+更新最新发布的 <input type="text" name="number" value="100" size="5"> 条信息 <input type="button" name="dosubmit2" value=" 开始更新 " onclick="myshopform.type.value='lastinput';myshopform.submit();"><br /><br />
+更新发布时间从 <?=form::date('fromdate', date('Y-n-j', mktime(0, 0, 0, date('n')-1, date('j'), date('Y'))))?> 到 
+<?=form::date('todate',date('Y-m-d',TIME))?> 的信息 
+<input type="button" name="dosubmit3" value=" 开始更新 " onclick="myshopform.type.value='date';myshopform.submit();"><br /><br />
+更新ID从 <input type="text" name="fromid" value="0" size="8"> 到 <input type="text" name="toid" size="8"> 的信息 <input type="button" name="dosubmit4" value=" 开始更新 " onclick="myshopform.type.value='id';myshopform.submit();">
+
+</td>
+</tr>
+</table>
+</form>
+</div>
+
+{/if}
+
+{if $notcomplete}
+<div class="space" style="border:1px #000 solid;line-height:22px;padding:10px;">
+    <p>貌似上次未生成完，<a href="?file={$file}&action=_area&module=dearcms&nextarea=1">点击这里继续生成</a>！</p>
+</div>
+{/if}
+
+<div class="space" style="border:1px #F00 solid;line-height:22px;padding:10px;">
+    <p style="color:red;font-weight:800;">注意：不要同时开多个窗口生成！</p>
+    </p>
+</div>
+
+<div class="space" style="border:1px green solid;line-height:22px;padding:10px;">
+    <p style="color:green;font-weight:800;">前台保持动态页面的情况下生成静态的方法：</p>
+    <p style="color:">
+        1.在网站基本设置中，设置不生成静态，也不启用URLRwrite。<br />
+        2.然后，系统工具 - 更新URL，<u>更新内容URL | 更新商铺URL | 更新栏目URL</u>。<br />
+        3.点<a href="?file={$file}&action=huyohtml" style="color:red;">这里开始</a>生成静态页面。<br />
+        4.全部生成完毕后，在网站基本设置中，设置为生成静态。<br />
+        5.最后，系统工具 - 更新URL，<u>更新内容URL | 更新商铺URL | 更新栏目URL</u>。
+    </p>
+</div>
+
+
+</body>
+</html>

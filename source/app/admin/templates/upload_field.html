@@ -1,0 +1,73 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+?>
+
+<script type="text/javascript">
+<!--
+function doCheck() 
+{
+	if(upload.<?=$uploadtext?>.value == '') {
+		alert('请选择文件!');
+		return false;
+	}
+	return true;
+}
+function previewimage()
+{
+	if(upload.<?=$uploadtext?>.value) $("#previewpic").attr("src", upload.<?=$uploadtext?>.value);
+}
+//-->
+</script>
+    <div class="space">
+        <div class="subtitle">图片上传</div>
+
+
+<form name="upload" method="post" action="?file=<?=$file?>&uploadtext=<?=$uploadtext?>" enctype="multipart/form-data" onsubmit="return doCheck();">
+<table cellpadding="0" cellspacing="0" class="maintable">
+  <tr class="altbg1">
+     <td>
+	         <input type="hidden" name="modelid" value="<?=$modelid?>">
+			 <input type="hidden" name="catid" value="<?=$catid?>">
+	         <input type="hidden" name="fieldid" value="<?=$fieldid?>">
+             <input name="<?=$uploadtext?>" type="file" size="15" onchange="previewimage()">
+             <input type="hidden" name="oldname">
+             <input type="hidden" name="rename" value="<?=$rename?>">
+             <input type="hidden" name="MAX_FILE_SIZE" value="<?=$upload_maxsize?>"> 
+             <input type="submit" name="dosubmit" value=" 上传 ">
+			 </td>
+   </tr>
+  <tr class="altbg1">
+     <td>
+	 允许上传类型：<?=$upload_allowext?><br />
+	 允许上传大小：<?=$attachment->size($upload_maxsize)?></td>
+   </tr>
+  <tr class="altbg1">
+     <td><input type="checkbox" name="isthumb" value="1" checked />生成缩略图（下面的缩略图大小只有在勾选此项时生效）</td>
+   </tr>
+  <tr class="altbg1">
+     <td>
+	 缩略图大小：宽 <input type="text" name="width" value="<?=$thumb_width?>" size="3"> px，高 <input type="text" name="height" value="<?=$thumb_height?>" size="3"> px
+	 </td>
+   </tr>
+  <tr class="altbg1">
+     <td>
+<img id="previewpic" onload="setpicWH(this,300,300)">
+<script type="text/javascript">
+<!--
+if($(window.opener.document).find("form[@name='myform'] #<?=$uploadtext?>").val())
+{
+    $("#previewpic").attr("src", $(window.opener.document).find("form[@name='myform'] #<?=$uploadtext?>").val()); 
+}
+else
+{
+	$("#previewpic").attr("src","images/nopic.gif"); 
+}
+//-->
+</script>
+			 </td>
+   </tr>
+</table>
+</form>
+</body>
+</html>

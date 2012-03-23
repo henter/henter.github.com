@@ -1,0 +1,77 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+?>
+
+
+
+
+<div class="space">
+    <div class="subtitle">{if $action=='edit'}修改{else}添加{/if}用户组</div>
+<form method="post" name="myform" action="{if $action!='edit'}?file={$file}&action=add{/if}">
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+    <tr class="altbg1">
+
+        <td width="150"><b>用户组名称</b></td>
+        <td>
+            <input type="text" name="data[rolename]" size="20" value="{$rolename}" size="20" require="true" datatype="limit"  min="3" max="20" msg="名称不得少于3个字符超过20个字符">
+        </td>
+     </tr>
+
+    <tr class="altbg1">
+        <td><b>权限分配</b>
+        <br />
+        勾选之菜单时请相应勾选父菜单。
+        <br />
+                    <a href="###" onclick="javascript:$('input[type=checkbox]').attr('checked', true)">全选</a>
+            <a href="###" onclick="javascript:$('input[type=checkbox]').attr('checked', false)">取消</a>
+        </td>
+        <td>
+<?php
+if($id>3){
+    $parentids = "2,3,4,5,6,8";
+}else{
+    $parentids = "84";
+}
+if($action=='add') $parentids = "2,3,4,5,6,8,84";
+?>
+
+{get sql="SELECT * FROM `dc_menu` WHERE `pass`=1 AND `parentid`=0 AND menuid in($parentids) ORDER BY `listorder`, `menuid`"}
+            <div style="font-size:14px;color:#00f;font-weight:bold;padding-top:10px;padding-bottom:10px;">
+            <input type="checkbox" name="power[]" value="{$r[menuid]}" <?=ckpower($r[menuid])?> >{$r[name]}</div>
+     {get sql="SELECT * FROM `dc_menu` WHERE `pass`=1 AND `parentid`=$r[menuid] ORDER BY `listorder`, `menuid`" return="c"}
+            	
+             {if $c[isfolder]}
+             <p><input type="checkbox" name="power[]" value="{$c[menuid]}" <?=ckpower($c[menuid])?> > <b>{$c[name]}</b>
+             <span style="margin-left:50px;margin:5px;">
+             {get sql="SELECT * FROM `dc_menu` WHERE `pass`=1 AND `parentid`=$c[menuid] ORDER BY `listorder`, `menuid`" return="d"}
+                    	<input type="checkbox" name="power[]" value="{$d[menuid]}" <?=ckpower($d[menuid])?> >{$d[name]}
+            {/get}</p>
+            </span>
+            {else}
+                <input type="checkbox" name="power[]" value="{$c[menuid]}" <?=ckpower($c[menuid])?> > <b>{$c[name]}</b>
+            {/if}
+    {/get}
+    <hr>
+{/get}
+
+
+        </td>
+    </tr>
+    
+    
+    <tr class="altbg1">
+        <td colspan="2"><input type="submit" name="dosubmit" class="btn" value="提交" /></td>
+    </tr>
+</table>
+</form>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+$().ready(function() {
+	  $('form').checkForm(1);
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+$parentid = $parentid ? $parentid : 0;
+if($mappoint){
+        $areamapvalue=explode(",",$mappoint);
+        $mapx=$areamapvalue[0];
+        $mapy=$areamapvalue[1];
+}
+?>
+
+<script type="text/javaScript">
+
+function remak_mappoint(){
+    var obj = document.getElementById('remark_iframe');
+    var iframe = document.getElementById('imappoint');
+    if(iframe && (iframe.src == '#'|| iframe.src.substr(iframe.src.length-1,1) =='#')) {
+        iframe.src = "admin/selectmap.php?mapkey={MAPKEY}&mapx={$mapx}&mapy={$mapy}";
+    }
+    if(obj) obj.style.display = "";
+}
+</script>
+
+
+<div class="space">
+    <div class="subtitle">操作提示</div>
+    <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>
+            <li>添加地区先添加省份（例如：广东），提交后，再下栏编辑地区内，添加省级以下的市区（例如：广州），区县（例如：天河区）</li>
+            <li>这里的地区按照省份，城市，区/县来分成三级；</li>
+            <li>第一次添加城市后，必须在“基本设置->界面和显示设置”页面选择默认点评城市；</li>
+            <font color=red>
+            <li>添加城市后，选择右边“开通”或“关闭”按钮来开通城市分站，开通后在城市名会变为红色，再进入编辑添加拼音，区号等城市二级访问域名（使用二级域名时须进行域名范解析，即进入域名服务商的域名管理添加*.yourname.com的域名指向）。</li>
+            <li>生成地区JS选择菜单</li>
+            <!-- <li>创建网站头部多城市选择菜单，可进入config.inc.php设置创建简单模式或复杂模式菜单。</li> -->
+            </font>
+    </td></tr>
+    </table>
+</div>
+
+
+
+
+
+<div class="space">
+<form method="post" name="myform" action="">
+    <div class="subtitle">{if $action=='add'}添加{else}修改{/if}地区</div>
+        <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+{if $action=='add'}
+	<tr class="altbg1"> 
+      <td width="150">上级地区</td>
+      <td>
+<?=form::select_area('parentid',0,0,0,$parentid)?>
+  </td>
+    </tr>
+{elseif $parentname}
+	<tr class="altbg1"> 
+      <td width="150">上级地区</td>
+      <td><span id="parentname">{$parentname}</span></td>
+    </tr>
+{/if}
+
+
+    <tr><td width="40%" class="altbg1">地区名称：<td><input type="text" name="info[areaname]" value="{$areaname}" class="txtbox2" />&nbsp;&nbsp;例如：广州</td></tr>
+
+    <tr><td width="40%" class="altbg1">地区域名：<td><input type="text" name="info[domain]" value="{$domain}" class="txtbox2" />
+    &nbsp;&nbsp;例如：gz</td></tr>
+
+    <tr><td width="40%" class="altbg1">城市模板：<td>
+
+<?=form::select_tpl('info[template]','main',$template);?>
+ (为每个城市分站设置不同的模板风格)
+      
+      </td></tr>
+
+    <tr><td class="altbg1">默认位置：<br />地图标注时使用，用于确定城市或地区位置<td>
+    <input type="text" name="info[mappoint]" id="map" value="{$mappoint}" class="txtbox2" />&nbsp;
+    <button type="button" class="btn2" onclick="remak_mappoint();">设置</button></td></tr>
+    <tr id="remark_iframe" style="display:none;">
+        <td colspan="2"><iframe src="#" id="imappoint" frameborder=no height="380" width="100%"></iframe></td>
+    </tr>
+    </table>
+
+
+
+        <div class="subtitle">{if $areacode}<font color=red>{$areaname}</font>{/if}分站搜索引擎优化</div>
+        <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+        		<tr><td colspan=2>说明：以下搜索引擎优化只针对<font color=red>{$areaname}</font>分站有效，如果以下未设置，则使用全局设置，请去<a href="?file=setting">网站配置</a>中设置</td></tr>
+            <tr>
+                <td width="50%" class="altbg1"><strong>标题附加字:</strong>网页标题通常是搜索引擎关注的重点，本附加字设置将出现在标题中网站名称的后面，如果有多个关键字，建议用 "|"、","(不含引号) 等符号分隔<br /><span class="font_2">SEO小技巧：网站标题不要太长，最好不要超过30个字符。</span></td>
+                <td width="50%"><input type="text" name="setting[title]" value="{$title}" class="txtbox" /></td>
+            </tr>
+            <tr>
+                <td class="altbg1"><strong>Meta Keywords:</strong>Keywords 项出现在页面头部的 Meta 标签中，用于记录本页面的关键字，多个关键字间请用半角逗号 "," 隔开</td>
+                <td><input type="text" name="setting[keywords]" value="{$keywords}" class="txtbox" /></td>
+            </tr>
+            <tr>
+                <td class="altbg1"><strong>Meta Description:</strong>Description 出现在页面头部的 Meta 标签中，用于记录本页面的概要与描述</td>
+                <td><input type="text" name="setting[description]" value="{$description}" class="txtbox" /></td>
+            </tr>
+            <tr>
+                <td class="altbg1"><strong>其它头部信息:</strong>如需在 &lt;head&gt;&lt;/head&gt; 中添加其它的 HTML 代码，可以使用本设置，否则请留空；请填写HTML代码，不要填写单一文字，否则会破环网页布局。</td>
+                <td><textarea name="setting[headhtml]" rows="5" cols="40" class="txtarea">{$headhtml}</textarea></td>
+            </tr>
+            <tr>
+                <td class="altbg1"><strong>热点搜索关键词:</strong>热点搜索关键词出现在<font color=red>北京</font>分站的首页搜索框下面，方便用户搜索。（两到三个）</td>
+                <td><input type="text" name="setting[hotwords]" value="{$hotwords}" class="txtbox" /></td>
+            </tr>            
+        </table>
+    
+    <center><input type="submit" name="dosubmit" value=" 提交 " class="btn" />&nbsp;&nbsp;&nbsp;
+    <input type="button" value=" 返回 " onclick="javascript:history.go(-1);" class="btn" /></center>
+</form>
+</div>
+
+
+
+
+
+</body>
+</html>
+<script language="javascript" type="text/javascript">
+$().ready(function() {
+    //$('form').checkForm(1);//会干扰默认模板选择
+});
+</script>

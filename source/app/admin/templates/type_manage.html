@@ -1,0 +1,44 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+?>
+{$menu}
+    <div class="space">
+        <div class="subtitle">类别管理</div>
+
+
+
+<form method="post" action="?mod=<?=$mod?>&file=<?=$file?>&action=listorder">
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+<tr class="altbg1">
+<td width="5%"><b>排序</b></td>
+<td width="5%"><b>ID</b></td>
+<td width="20%"><b>类别名称</b></td>
+<td width="20%"><b>所属模型</b></td>
+<td width="*"><b>类别描述</b></td>
+<td width="30%"><b>管理操作</b></td>
+</tr>
+<?php 
+if(is_array($infos)){
+	foreach($infos as $info){
+?>
+<tr class="altbg1">
+<td class="align_c"><input type="text" name="info[<?=$info['typeid']?>]" value="<?=$info['listorder']?>" size="5"></td>
+<td class="align_c"><?=$info['typeid']?></td>
+<td class="align_c"><span style="<?=$info['style']?>"><?=$info['name']?></span></td>
+<td class="align_c"><?=$MODEL[$info['modelid']]['name']?></td>
+<td class="align_c"><?=$info['description']?></td>
+<td class="align_c"><a href="?file=<?=$file?>&action=edit&typeid=<?=$info['typeid']?>&module=<?=$module?>">修改</a> | <a href="javascript:confirmurl('?file=<?=$file?>&action=delete&typeid=<?=$info['typeid']?>&module=<?=$module?>', '是否删除该类型')">删除</a> </td>
+</tr>
+<?php 
+	}
+}
+?>
+</table>
+<div class="button_box"><input type="submit" name="dosubmit" class="btn" value=" 更新排序 "></div>
+<div id="pages"><?=$type->pages?></div>
+</form>
+
+</div>
+</body>
+</html>

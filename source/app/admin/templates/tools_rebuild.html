@@ -1,0 +1,40 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+?>
+<div id="body">
+<div class="space">
+    <div class="subtitle">操作提示</div>
+    <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+    <tr><td><b>提示: 经常重建数据有助于提高数据准确性</b><br />通常执行大量的修改操作后，建议执行一次此操作。可以提高数据准确性。</td></tr>
+    </table>
+</div>
+<div class="space">
+    <div class="subtitle">重建数据</div>
+    <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+        <form method="post" action="">
+        <tr>
+            <td class="altbg1" width="80%"><strong>更新板块分类内的商铺量统计</strong></td>
+            <td width="*"><center><input type="submit" name="toolssubmit" value=" 确定 " class="btn" /></center></td>
+            <input type="hidden" name="rebuild" value="catshop" />
+        </tr>
+        </form>
+        <form method="post" action="">
+        <tr>
+            <td class="altbg1"><strong>更新商铺相册图片统计</strong></td>
+            <td><center><input type="submit" name="toolssubmit" value=" 确定 " class="btn" /></center></td>
+            <input type="hidden" name="rebuild" value="shoppic" />
+        </tr>
+        </form>
+        <form method="post" action="">
+        <tr>
+            <td class="altbg1"><strong>更新会员点评量统计</strong></td>
+            <td><center><input type="submit" name="toolssubmit" value=" 确定 " class="btn" /></center></td>
+            <input type="hidden" name="rebuild" value="review" />
+        </tr>
+        </form>
+
+    </table>
+</div>
+</body>
+</html>

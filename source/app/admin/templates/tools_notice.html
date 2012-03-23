@@ -1,0 +1,49 @@
+<?php 
+defined('IN_DC') or exit('Access Denied');
+include atpl('header');
+?>
+<div id="body">
+<form method="post" action="">
+    <div class="space">
+        <div class="subtitle">搜索符合条件的用户</div>
+        <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="45%" class="altbg1">用户名(多个用户名用逗号“,”分隔):</td>
+                <td width="55%"><input type="text" name="search[username]" class="txtbox" value="<?=$search['username']?>" /></td>
+            </tr>
+            <tr>
+                <td class="altbg1">用户组(设置允许参与搜索的用户组):</td>
+                <td><select name="search[groupid]">
+                    <option value="" selected="selected">请选择用户组</option>
+                    <?=$group_opt?>
+                </select></td>
+            </tr>
+        </table>
+        <center><input type="submit" name="searchsubmit" value=" 搜索 " class="btn" /></center>
+    </div>
+    <?if($total['count']>0) {?>
+    <div class="space">
+        <div class="subtitle">符合要求的会员: <?=$total['count']?></div>
+        <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td class="altbg1">标题:</td>
+                <td><input type="text" name="batch[subject]" class="txtbox" /></td>
+            </tr>
+            <tr>
+                <td class="altbg1">内容:</td>
+                <td><textarea name="batch[message]" rows="10" cols="55" class="txtarea"></textarea></td>
+            </tr>
+            <tr>
+                <td class="altbg1">批量发送数量:</td>
+                <td><input type="text" name="batch[pertask]" value="100" class="txtbox4" /></td>
+            </tr>
+        </table>
+        <center><input type="submit" name="batchsubmit" value=" 提交 " class="btn" /></center>
+    </div>
+    <?}?>
+</form>
+
+</div>
+
+</body>
+</html>
