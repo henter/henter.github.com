@@ -30,17 +30,6 @@ function G($key, $group = null) {
 	return null;
 }
 
-//获取app文件夹路径
-function appath($app=''){
-    if(!$app) return DCS.'app/';
-    return DCS.'app/'.$app.'/';
-}
-
-//返回app的mod文件路径
-function modpath($mod='index',$app=ROUTE_APP){
-    return appath($app).'mod/'.$mod.'.inc.php';
-}
-
 //系统级错误
 function system_error($message, $show = true, $save = true, $halt = true) {
     import('class.error',false);

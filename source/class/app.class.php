@@ -2,19 +2,13 @@
 /*
     核心初始类
 */
-class app
-{
-    function __construct()
-    {
-        $param = new param();
-        define('ROUTE_APP', $param->route_app());
-        define('ROUTE_MOD', $param->route_mod());
-        define('ROUTE_ACT', $param->route_act());
+class app{
+    
+    function __construct(){
         $this->init();
     }
     
     private function init(){
-        dc::loadclass('app_abstract','',false);
         $app_controller = $this->load_app();
         if (preg_match('/^[_]/i', ROUTE_MOD)) {
             system_error(ROUTE_MOD.'为内部方法，禁止访问。');
@@ -33,14 +27,10 @@ class app
     */
     private function load_app($app = '',$classname='') {
         if (!$app) $app = ROUTE_APP;
-        $filepath = DCS.'app/'.$app.'/controller.class.php';
+        $filepath = dc::appath($app).'app.class.php';
         if (file_exists($filepath)) {
-            //自动加载app的类和函数库
-            dc::autofunc(ROUTE_APP);
-            dc::autoclass(ROUTE_APP);
-            
             //app主控制器
-            $classname = $classname ? $classname : 'controller_'.$app;
+            $classname = $classname ? $classname : 'app_'.$app;
             include $filepath;
             $app_controller = new $classname;
             //检查是否继承了app_anstract抽象类
@@ -63,10 +53,9 @@ class app
 /*
     app抽象类 所有app的controller.class.php必须继承此类
 */
-abstract class app_abstract
-{
-    public function __construct()
-    {
+abstract class app_abstract{
+    public function __construct(){
+        
     }
     
     //自动加载app的模块
@@ -81,18 +70,15 @@ abstract class app_abstract
     }
     
     //自动获取对象属性
-    public function __get($key)
-    {
+    public function __get($key){
         return $this->get($key);
     }
     
-    public function __set($key, $value)
-    {
-        return null === $value ? $this->delete($key) : $this->set($key, $value);
+    public function __set($key, $value){
+        return NULL === $value ? $this->delete($key) : $this->set($key, $value);
     }
     
-    public function __unset($key)
-    {
+    public function __unset($key){
         return $this->delete($key);
     }
     

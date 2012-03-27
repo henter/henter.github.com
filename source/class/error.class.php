@@ -48,7 +48,7 @@ class error
 		$debug_backtrace = debug_backtrace();
 		krsort($debug_backtrace);
 		foreach ($debug_backtrace as $k => $error) {
-			$file = str_replace(DISCUZ_ROOT, '', $error['file']);
+			$file = str_replace(DCR, '', $error['file']);
 			$func = isset($error['class']) ? $error['class'] : '';
 			$func .= isset($error['type']) ? $error['type'] : '';
 			$func .= isset($error['function']) ? $error['function'] : '';
@@ -142,7 +142,7 @@ EOT;
 	function write_error_log($message) {
 		$message = error::clear($message);
 		$time = time();
-		$file =  DC_ROOT.'data/log/'.date("Ym").'_errorlog.php';
+		$file =  DCD.'log/'.date("Ym").'_errorlog.php';
 		$hash = md5($message);
 
 		$uid = G('uid');

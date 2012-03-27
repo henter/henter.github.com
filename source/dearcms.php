@@ -1,6 +1,6 @@
 <?php
 /**
- *  dc.php DearCMS入口文件
+ *  dearcms.php DearCMS入口文件
  */
 define('IN_DC', true);
 
@@ -31,6 +31,17 @@ class dc {
         return 'ok';
     }
     
+
+    //获取app文件夹路径
+    function appath($app=''){
+        if(!$app) return DCS.'app'.DS;
+        return DCS.'app'.DS.$app.DS;
+    }
+
+    //返回app的mod文件路径
+    function modpath($mod='index',$app=''){
+        return self::appath($app).'mod'.DS.$mod.'.inc.php';
+    }
 
     /**
      * 加载资源 import('app:type.name');
@@ -64,10 +75,10 @@ class dc {
         }
         if(in_array($type, array('class','model','tool'))){
             $path = $type;
-            $filepath = $app ? DCS.'app'.DS.$app.DS : DCS;
+            $filepath = $app ? self::appath($app) : DCS;
             $filepath .= $path.DS.$name.'.class.php';
         }else{
-            $filepath = $app ? DCS.'app'.DS.$app.DS : DCS;
+            $filepath = $app ? self::appath($app) : DCS;
             $filepath .= 'function'.DS.$name.'.func.php';
         }
         return $info ? compact('app','type','name','filepath') : $filepath;
@@ -94,6 +105,8 @@ class dc {
         if (file_exists($filepath)) {
             include $filepath;
             if ($initialize) {
+                //类名含目录路径时
+                if(strpos($name, '/')) $name = array_pop(explode('/', $name));
                 $classes[$key] = new $name;
             } else {
                 $classes[$key] = true;
@@ -167,7 +180,6 @@ class dc {
 class dearcms{
     var $db = null;
     var $session = null;
-    var $config = array();
     var $var = array();
 
     var $superglobal = array(
@@ -281,7 +293,6 @@ class dearcms{
     	$this->var['staticurl'] = SITE_URL.'content/static/';
     	$this->var['siteurl'] = SITE_URL;
         
-    	$this->config = & $_config;
     	$this->var['config'] = & $_config;
        
     	if(substr($_config['cookie']['path'], 0, 1) != '/') {
@@ -290,6 +301,18 @@ class dearcms{
     	$this->var['config']['cookie']['pre'] = $this->var['config']['cookie']['pre'].substr(md5($this->var['config']['cookie']['path'].'|'.$this->var['config']['cookie']['domain']), 0, 4).'_';
 
         $this->var['authkey'] = md5($_config['authkey'].$this->var['config']['cookie']['pre']);
+        
+        //模板
+        define('TPL_ROOT', DCR.'content'.DS.'template'.DS.$_config['template'].DS); //模板保存物理路径 后面要带‘/’
+        define('TPL_CACHEPATH', DCD.'cache_template'.DS.$_config['template'].DS); //模板缓存物理路径
+        define('TPL_CACHEPATH_ADMIN', DCD.'cache_template'.DS.'admin'.DS); //模板缓存物理路径
+        define('TPL_TAG_CACHEPATH', DCC.'tpltag'.DS); //模板标签缓存
+            
+        //路由
+        $router = import('class.router');
+        define('ROUTE_APP', $router->route_app());
+        define('ROUTE_MOD', $router->route_mod());
+        define('ROUTE_ACT', $router->route_act());
 
     }
     
@@ -312,7 +335,7 @@ class dearcms{
     //数据库
     function _init_db(){
         if(!$this->dbclass) $this->dbclass = 'db_mysql';
-        import('class.'.$this->dbclass, true);
+        import('class.db/'.$this->dbclass, true);
         $db = & DB::object($this->dbclass);
         $db->set_config($this->var['config']['db'][$this->var['config']['dbid']]);
         DB::$pre = & $db->pre;
@@ -321,17 +344,11 @@ class dearcms{
     
     //设置项
     function _init_dc(){
-        $tpldir = dc::option('tpldir');
-    	 $this->var['tpldir'] = $tpldir;
+        //$tpldir = dc::option('tpldir');
         
         $this->var['staticurl'] = $this->var['staticurl'] ? $_config['staticurl'] : SITE_URL.'content/static/';
         
-        define('TPL_ROOT', DCR.'content/template/'.$_config['template'].'/'); //模板保存物理路径 后面要带‘/’
-        define('TPL_CACHEPATH', DATA_ROOT.'cache_templates/default/'); //模板缓存物理路径
-        define('TPL_CACHEPATH_ADMIN', DATA_ROOT.'cache_templates/admin/'); //模板缓存物理路径
-        define('TPL_TAG_CACHEPATH', CACHE_PATH.'tpltag/'); //模板标签缓存
-
-
+        import('class.app');
     }
 
 }
@@ -339,7 +356,7 @@ class dearcms{
 
 /* 数据库类 来自DiscuzX2 */
 class DB{
-       public static $pre = 'ddd';
+       public static $pre = '';
 	function &object($dbclass = 'db_mysql') {
             static $db;
             if(empty($db)) $db = new $dbclass();

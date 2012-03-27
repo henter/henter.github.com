@@ -9,11 +9,8 @@ db类
 
 
 
-class类以dc开头
-model类以model开头
-app类以app开头
-
-加载类
-loadclass('classname');
-加载app的类
-loadclass('app:classname');
+import 导入资源
+    import('func');
+    import('class.classname');
+    import('tool.toolname', false);//不实例化
+    import('model.modelname');

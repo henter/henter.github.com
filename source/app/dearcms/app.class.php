@@ -1,5 +1,5 @@
 <?php
-class controller_dearcms extends app_abstract
+class app_dearcms extends app_abstract
 {
     function __construct()
     {
@@ -16,8 +16,7 @@ class controller_dearcms extends app_abstract
     
     //注册app所需功能
     function register(){
-        register_uribase('testuri');
-        register_tpltag('testuri');
+        
     }
     
     function _fuck(){

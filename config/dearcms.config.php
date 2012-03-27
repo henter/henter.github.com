@@ -9,8 +9,11 @@ $dc_config = array();
 $dc_config['debug'] = 1;
 $dc_config['authkey'] = '$#!%^$#@%$';
 $dc_config['charset'] = 'utf-8';
+
+$dc_config['template'] = 'default'; //模板目录名
 $dc_config['tplrefresh'] = 1; //模板自动刷新
 $dc_config['tplrefresh_time'] = 600;//模板自动刷新时间 秒
+    
 $dc_config['staticurl'] = '';
 
 

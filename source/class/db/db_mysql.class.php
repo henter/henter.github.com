@@ -346,7 +346,7 @@ class db_mysql
 		$dberrno = $this->errno();
 		$phperror = '<table style="font-size:12px" cellpadding="0"><tr><td width="270">File</td><td width="80">Line</td><td>Function</td></tr>';
 		foreach (debug_backtrace() as $error) {
-			$error['file'] = str_replace(DC_ROOT, '', $error['file']);
+			$error['file'] = str_replace(DCS, '', $error['file']);
 			$error['class'] = isset($error['class']) ? $error['class'] : '';
 			$error['type'] = isset($error['type']) ? $error['type'] : '';
 			$error['function'] = isset($error['function']) ? $error['function'] : '';
