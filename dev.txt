@@ -10,7 +10,21 @@ db类
 
 
 import 导入资源
-    import('func');
+    import('app:abcfunc');
+        source/app/app/function/abcfunc.func.php
+    import('abcfunc');
+        source/app/function/abcfunc.func.php
+        
+    import('app:class.classname');
+        source/app/app/class/classname.class.php
     import('class.classname');
-    import('tool.toolname', false);//不实例化
+        source/app/class/classname.class.php
+        
+    model类名为 modelname_model
+    import('app:model.modelname');
+        source/app/app/model/modelname.model.class.php
     import('model.modelname');
+        source/app/model/modelname.model.class.php
+
+    
+    import('tool.toolname', false);//不实例化

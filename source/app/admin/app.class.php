@@ -8,20 +8,20 @@ Version: 1.0
 Author URI: http://henter.me/
 */
 
-class controller_admin extends app_abstract
+class app_admin extends app
 {
-    function __construct()
-    {
+    function __construct(){
         define('IN_ADMIN',true);
-        dc::autofunc('admin');
-        //$a = dc::loadmodel('test');
-
     }
     
 
     
     function register(){
     
+    }
+    
+    function index(){
+        echo 'admin index';
     }
     
     function _fuck(){

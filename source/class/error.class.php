@@ -36,24 +36,29 @@ class error
 	}
 
 	function debug_backtrace() {
-		$skipfunc[] = 'error->debug_backtrace';
-		$skipfunc[] = 'error->db_error';
-		$skipfunc[] = 'error->template_error';
-		$skipfunc[] = 'error->system_error';
+		$skipfunc[] = 'error::debug_backtrace';
+		$skipfunc[] = 'error::db_error';
+		$skipfunc[] = 'error::template_error';
+		$skipfunc[] = 'error::system_error';
 		$skipfunc[] = 'db_mysql->halt';
 		$skipfunc[] = 'db_mysql->query';
 		$skipfunc[] = 'DB::_execute';
+        
+		$skipfunc[] = 'system_error';
+        
 
 		$show = $log = '';
 		$debug_backtrace = debug_backtrace();
+
 		krsort($debug_backtrace);
 		foreach ($debug_backtrace as $k => $error) {
 			$file = str_replace(DCR, '', $error['file']);
 			$func = isset($error['class']) ? $error['class'] : '';
 			$func .= isset($error['type']) ? $error['type'] : '';
 			$func .= isset($error['function']) ? $error['function'] : '';
+
 			if(in_array($func, $skipfunc)) {
-				break;
+				continue;
 			}
 			$error[line] = sprintf('%04d', $error['line']);
 

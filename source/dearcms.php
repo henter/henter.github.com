@@ -39,7 +39,8 @@ class dc {
     }
 
     //返回app的mod文件路径
-    function modpath($mod='index',$app=''){
+    function modpath($mod='index'){
+        if(strpos($mod, ':')) list($app, $mod) = explode(':', $mod);
         return self::appath($app).'mod'.DS.$mod.'.inc.php';
     }
 
@@ -76,7 +77,12 @@ class dc {
         if(in_array($type, array('class','model','tool'))){
             $path = $type;
             $filepath = $app ? self::appath($app) : DCS;
-            $filepath .= $path.DS.$name.'.class.php';
+            //model类 文件命名以model.class.php结尾
+            if($type == 'model'){
+                $filepath .= $path.DS.$name.'.model.class.php';
+            }else{
+                $filepath .= $path.DS.$name.'.class.php';
+            }
         }else{
             $filepath = $app ? self::appath($app) : DCS;
             $filepath .= 'function'.DS.$name.'.func.php';
@@ -102,18 +108,20 @@ class dc {
         //'app','type','name','filepath'
         @extract(self::lib($name, true));
 
-        if (file_exists($filepath)) {
-            include $filepath;
+        if (include $filepath) {
             if ($initialize) {
                 //类名含目录路径时
                 if(strpos($name, '/')) $name = array_pop(explode('/', $name));
+                //model类 类名为 model_name命名  文件命名以model.class.php结尾
+                if($type == 'model') $name = 'model_'.$name;
                 $classes[$key] = new $name;
             } else {
                 $classes[$key] = true;
             }
             return $classes[$key];
         } else {
-            return false;
+            system_error($type.'文件'.$name.'载入出错！');
+            //return false;
         }
     }
     
@@ -130,12 +138,12 @@ class dc {
         //'app','type','name','filepath'
         @extract(self::lib($name, true));
 
-        if (file_exists($filepath)) {
-            include $filepath;
+        if (include $filepath) {
             $funcs[$key] = true;
             return true;
         } else {
-            return false;
+            system_error('func文件'.$name.'载入出错！');
+            //return false;
         }
     }
 
@@ -161,6 +169,8 @@ class dc {
 
         if (file_exists($path)) {
             $configs[$file] = include $path;
+        }else{
+            system_error('config文件'.$file.'载入出错！');
         }
         if (empty($key)) {
             return $configs[$file];
