@@ -1369,9 +1369,7 @@ add_action('set_current_user', 'kses_init');
  *
  * @since 2.8.1
  */
-function safecss_filter_attr( $css, $deprecated = '' ) {
-	if ( !empty( $deprecated ) )
-		_deprecated_argument( __FUNCTION__, '2.8.1' ); // Never implemented
+function safecss_filter_attr( $css) {
 
 	$css = dc_kses_no_null($css);
 	$css = str_replace(array("\n","\r","\t"), '', $css);

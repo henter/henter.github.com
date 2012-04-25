@@ -4,7 +4,17 @@
 */
 
 
-
+ 
+/*
+* 模板函数 对应模板语法中的 {template 模板名,模板目录绝对路径}
+*/
+function template($tplfile, $tpldir,$subdir='') {
+	define ( 'IN_TPL', TRUE );
+	$template = import('class.template');
+	$template->tpl_refresh_time = TPL_REFRESH_TIME;
+	$template->tpl_subdir = $subdir;
+	return $template->tpl ( $tplfile, $tpldir );
+}
 //模板函数
 function tpl($tpl){
     //增加模板语法到模板类 
@@ -50,49 +60,19 @@ function atpl($tpl){
 function add_tpl_parse_func($func){
     $tpl_parse_func = G('tpl_parse_func');
     //如果没定义过 
-    if(!is_array($tpl_parse_func)) return GSET('tpl_parse_func',array($func));
+    if(!is_array($tpl_parse_func)) return G('tpl_parse_func',array($func));
     //如果已经存在
     if(!$func || in_array($func,$tpl_parse_func)) return false;
     //加入到解析函数数组
     $tpl_parse_func[] = $func;
-    return GSET('tpl_parse_func',$tpl_parse_func);
-}
-
-
-
-//应对get模板语法
-function get_parse($str)
-{
-	preg_match_all("/([a-z]+)\=\"([^\"]+)\"/i", stripslashes($str), $matches, PREG_SET_ORDER);
-	foreach($matches as $v)
-	{
-		$r[$v[1]] = $v[2];
-	}
-	extract($r);
-	if(!isset($dbsource)) $dbsource = '';
-	if(!isset($dbname)) $dbname = '';
-	if(!isset($sql)) $sql = '';
-	if(!isset($rows)) $rows = 0;
-	if(!isset($urlrule)) $urlrule = '';
-	if(!isset($distinctfield)) $distinctfield = '';
-	if(!isset($return) || !preg_match("/^\w+$/i", $return)) $return = 'r';
-	if(isset($page))
-	{
-	    $str = "<?php \$ARRAY = get(\"$sql\", $rows, $page, \"$dbname\", \"$dbsource\", \"$urlrule\",\"$distinctfield\");\$DATA=\$ARRAY['data'];\$total=\$ARRAY['total'];\$count=\$ARRAY['count'];\$pages=\$ARRAY['pages'];unset(\$ARRAY);foreach(\$DATA AS \$n=>\${$return}){\$n++;?>";
-	}
-	else
-	{
-		$str = substr($str, -1) == '/' ? "<?php \${$return} = get(\"$sql\", -1, 0, \"$dbname\", \"$dbsource\");?>" : "<?php \$DATA = get(\"$sql\", $rows, 0, \"$dbname\", \"$dbsource\");foreach(\$DATA AS \$n => \${$return}) { \$n++;?>";
-	}
-	return $str;
+    return G('tpl_parse_func',$tpl_parse_func);
 }
 
 
 /**
  * 解析标签内的各项属性
  */
-function dc_param_parse($str,$type)
-{
+function dc_param_parse($str,$type){
 	//preg_match_all("/([a-z]+)\=\"([^\"]+)\"/i", stripslashes($str), $matches1, PREG_SET_ORDER);//属性双引号
 	//preg_match_all("/([a-z]+)\=\'([^\']+)\'/i", stripslashes($str), $matches2, PREG_SET_ORDER);//属性单引号
 	preg_match_all("/([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+)\=\"([^\"]+)\"/i", stripslashes($str), $matches1, PREG_SET_ORDER);//属性双引号
@@ -142,47 +122,4 @@ function dc_tpltag_cumstom($group='dearcms',$a='',$b='',$c=''){
     $paramstr = '<pre><g '.$group.' g> <a '.$a.' a> - <b '.$b.' b> - <c '.$c.' c></pre>';
     $return = 'r';
     return "<?php \$DATA = arclist(\"$paramstr\");\$n=0;if(is_array(\$DATA)) foreach(\$DATA AS \$k => \${$return}) { \$n++;?>";
-}
-
-
-//模板标签数据缓存  cc参数等于2时，更新缓存
-function _load_tpltag_cache($type,$paramstr,$cachetime=''){
-    if(!$paramstr || $_GET['cc']) return '';
-    $key = md5($paramstr);
-    if(_check_tpltag_cache($type,$key,$cachetime)){
-        $keyfile = $type.'_'.$key.'.php';
-        $keyfilepath = TPL_TAG_CACHEPATH.$keyfile;
-        $data = cache_read($keyfile, TPL_TAG_CACHEPATH);
-        return $data;
-    }
-    return false;
-}
-
-//模板标签数据缓存
-function _write_tpltag_cache($type,$paramstr,$data,$cachetime=''){
-    if(!$paramstr || !$data) return '';
-    $keyfile = $type.'_'.md5($paramstr).'.php';
-    //缓存过期 或者加了cc参数 重新写入
-    if(!_check_tpltag_cache($type,md5($paramstr),$cachetime) || $_GET['cc']==2){
-        cache_write($keyfile, $data, TPL_TAG_CACHEPATH);
-    }
-    return $data;//返回原始数据
-}
-
-//检查缓存是否过期
-function _check_tpltag_cache($type,$key,$cachetime=''){
-    if(!$key || $_GET['cc']) return '';
-    $keyfile = $type.'_'.$key.'.php';
-    $keyfilepath = TPL_TAG_CACHEPATH.$keyfile;
-
-    //缓存刷新时间 后台设置的时间单位是分钟
-    $_tpltag_refresh_time = TPLTAG_REFRESH_TIME ? TPLTAG_REFRESH_TIME : 60*60;
-    //如果有自定义的缓存时间 cachetime
-    $_tpltag_refresh_time = intval($cachetime) ? intval($cachetime) : $_tpltag_refresh_time;
-
-    //如果缓存文件不存在 或者过期 则返回false
-    if ((! file_exists ( $keyfilepath ) || (time () - @filemtime ( $keyfilepath ) > $_tpltag_refresh_time))) {
-        return false;
-    }
-    return true;
 }

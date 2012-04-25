@@ -2,18 +2,7 @@
 /*
  * 模板处理类
  */
- 
-/*
-* 模板函数 对应模板语法中的 {template 模板名,模板目录绝对路径}
-* 调用 include template(模板名,模板目录绝对路径,自定义模板缓存路径);
-*/
-function template($tplfile, $tpldir,$subdir='') {
-	define ( 'IN_TPL', TRUE );
-	$template = dc::loadclass('template');
-	$template->tpl_refresh_time = TPL_REFRESH_TIME;
-	$template->tpl_subdir = $subdir;
-	return $template->tpl ( $tplfile, $tpldir );
-}
+
 class template {
 	/**
 	 * 模板缓存存放目录
@@ -48,7 +37,7 @@ class template {
 		$compiledtplfile = $compiledtpldir . "/" . $file . ".tpl.php"; //构造编译文件[Define compile file]
 
               //如果目录不存在 创建
-              dir_create(dirname($compiledtplfile));
+              IO::mkdir(dirname($compiledtplfile));
 		//模板缓存文件不存在或者模板文件比缓存更新或者创建日期超出刷新时间
 		if (TPL_REFRESH && (! file_exists ( $compiledtplfile ) || @filemtime ( $tplfile ) > @filemtime ( $compiledtplfile ) || (time () - @filemtime ( $compiledtplfile ) > $this->tpl_refresh_time))) {
 			$this->tpl_compile ( $tplfile, $compiledtplfile ); //编译模板[Compile template]
@@ -172,16 +161,13 @@ class template {
 
 }
 
-if (! function_exists ( 'stripvtags' )) {
-	function stripvtags($expr, $statement='') {
-		$expr = str_replace ( "\\\"", "\"", preg_replace ( "/\<\?\=(\\\$.+?)\?\>/s", "\\1", $expr ) );
-		$statement = str_replace ( "\\\"", "\"", $statement );
-		return $expr . $statement;
-	}
+
+function stripvtags($expr, $statement='') {
+	$expr = str_replace ( "\\\"", "\"", preg_replace ( "/\<\?\=(\\\$.+?)\?\>/s", "\\1", $expr ) );
+	$statement = str_replace ( "\\\"", "\"", $statement );
+	return $expr . $statement;
 }
-if (! function_exists ( 'addquote' )) {
-	function addquote($var) {
-		return str_replace("\\\"", "\"", preg_replace("/\[([a-zA-Z0-9_\-\.\x7f-\xff]+)\]/s", "['\\1']", $var));
-	}
+
+function addquote($var) {
+	return str_replace("\\\"", "\"", preg_replace("/\[([a-zA-Z0-9_\-\.\x7f-\xff]+)\]/s", "['\\1']", $var));
 }
-?>

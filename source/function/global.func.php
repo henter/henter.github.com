@@ -3,31 +3,28 @@
     系统常用函数
 */
 
-
-function GSET($key , $value, $group = null) {
-	global $_G;
-	$k = explode('.', $group === null ? $key : $group.'.'.$key);
-	switch (count($k)) {
-		case 1: $_G[$k[0]] = $value; break;
-		case 2: $_G[$k[0]][$k[1]] = $value; break;
-		case 3: $_G[$k[0]][$k[1]][$k[2]] = $value; break;
-		case 4: $_G[$k[0]][$k[1]][$k[2]][$k[3]] = $value; break;
-		case 5: $_G[$k[0]][$k[1]][$k[2]][$k[3]][$k[4]] =$value; break;
-	}
-	return true;
-}
-
-function G($key, $group = null) {
-	global $_G;
-	$k = explode('.', $group === null ? $key : $group.'.'.$key);
-	switch (count($k)) {
-		case 1: return isset($_G[$k[0]]) ? $_G[$k[0]] : null; break;
-		case 2: return isset($_G[$k[0]][$k[1]]) ? $_G[$k[0]][$k[1]] : null; break;
-		case 3: return isset($_G[$k[0]][$k[1]][$k[2]]) ? $_G[$k[0]][$k[1]][$k[2]] : null; break;
-		case 4: return isset($_G[$k[0]][$k[1]][$k[2]][$k[3]]) ? $_G[$k[0]][$k[1]][$k[2]][$k[3]] : null; break;
-		case 5: return isset($_G[$k[0]][$k[1]][$k[2]][$k[3]][$k[4]]) ? $_G[$k[0]][$k[1]][$k[2]][$k[3]][$k[4]] : null; break;
-	}
-	return null;
+//设置$_G的值
+function G($key, $value = null) {
+    global $_G;
+    $k = explode('.', $key);
+    if($value === null ){
+        switch (count($k)) {
+            case 1: return isset($_G[$k[0]]) ? $_G[$k[0]] : null; break;
+            case 2: return isset($_G[$k[0]][$k[1]]) ? $_G[$k[0]][$k[1]] : null; break;
+            case 3: return isset($_G[$k[0]][$k[1]][$k[2]]) ? $_G[$k[0]][$k[1]][$k[2]] : null; break;
+            case 4: return isset($_G[$k[0]][$k[1]][$k[2]][$k[3]]) ? $_G[$k[0]][$k[1]][$k[2]][$k[3]] : null; break;
+            case 5: return isset($_G[$k[0]][$k[1]][$k[2]][$k[3]][$k[4]]) ? $_G[$k[0]][$k[1]][$k[2]][$k[3]][$k[4]] : null; break;
+        }
+    }else{
+        switch (count($k)) {
+            case 1: $_G[$k[0]] = $value; break;
+            case 2: $_G[$k[0]][$k[1]] = $value; break;
+            case 3: $_G[$k[0]][$k[1]][$k[2]] = $value; break;
+            case 4: $_G[$k[0]][$k[1]][$k[2]][$k[3]] = $value; break;
+            case 5: $_G[$k[0]][$k[1]][$k[2]][$k[3]][$k[4]] =$value; break;
+        }
+    }
+    return true;
 }
 
 //系统级错误
@@ -92,10 +89,6 @@ function isemail($email) {
 	return strlen($email) > 6 && preg_match("/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/", $email);
 }
 
-//问题答案加密
-function quescrypt($questionid, $answer) {
-	return $questionid > 0 && $answer != '' ? substr(md5($answer.md5($questionid)), 16, 8) : '';
-}
 
 //随机字符
 function random($length, $numeric = 0) {
@@ -114,53 +107,7 @@ function strexists($string, $find) {
 	return !(strpos($string, $find) === FALSE);
 }
 
-//毫秒时间
-function dmicrotime() {
-	return array_sum(explode(' ', microtime()));
-}
-
-//过滤非法字符
-function filter_word($data = ''){
-	global $DC;
-	$filter_word = trim($DC['filter']);
-	if(!$filter_word || (!$data && !$_GET && !$_POST)) return false;
-	$filter_word = array_filter(array_map('trim', explode(" ", $filter_word)));
-       if(!$filter_word) return false;
-	$pattern = str_replace('\*', '.*', implode('|', array_map('preg_quote', $filter_word)));
-	$data = array2string($_REQUEST);
-	if($pattern && preg_match("/($pattern)/", $data, $m))
-	{
-		$pattern_word = $m[0];
-		define('ILLEGAL_WORD', $pattern_word);
-		unset($m[0]);
-		$word = implode(' ', $m);
-		$logdata = array(TIME, IP, $word, $pattern_word);
-		$logfile = DC_ROOT.'data/filterlog/'.date('Ym', TIME).'.csv';
-		$fp = fopen($logfile, 'a');
-		fputcsv($fp, $logdata);
-		fclose($fp);
-		return true;
-	}
-	return false;
-}
-
-//获取当前页面URL，并且去掉指定参数(中间用空格隔开多个参数)，第二个参数是附加到url后面的被去掉的参数值，第三个参数是附加在后面的字符
-function get_cururl($delparam,$value,$addparam=''){
-    $alldelparam = explode(" ", $delparam);
-    $action = SCRIPT_NAME;
-    //$action .= URL;
-    $action .= '?'.$_SERVER['QUERY_STRING'];    //得到地址栏中？后的内容
-    if($delparam && is_array($alldelparam)){
-        foreach($alldelparam AS $v){
-            $action = preg_replace("/&".$v."\b[^\&]*/","",$action);
-            $action = preg_replace("/\b".$v."\b[^\&]*\&*/","",$action);
-        }
-    }
-    //被赋值的参数 排第一个
-    if($value) $action .= "&amp;".$alldelparam[0]."=$value";
-    return $action.$addparam;
-}
-
+//缩略图
 function thumb($imgurl, $width = 100, $height = 100 ,$autocut = 1, $smallpic = 'images/nopic_small.gif'){
 	global $image;
 	if(empty($imgurl)) return $smallpic;
@@ -220,6 +167,11 @@ function dstripslashes($string) {
 		$string = stripslashes($string);
 	}
 	return $string;
+}
+
+//毫秒时间
+function dmicrotime() {
+	return array_sum(explode(' ', microtime()));
 }
 
 //得到时间戳
@@ -339,22 +291,26 @@ function stripstr($str){
 }
 
 function set_cookie($var, $value = '', $time = 0){
-	$time = $time > 0 ? $time : ($value == '' ? PHP_TIME - 3600 : 0);
-	$s = $_SERVER['SERVER_PORT'] == '443' ? 1 : 0;
-	$var = COOKIE_PRE.$var;
-	$_COOKIE[$var] = $value;
-	if(is_array($value)){
-		foreach($value as $k=>$v){
-			setcookie($var.'['.$k.']', $v, $time, COOKIE_PATH, COOKIE_DOMAIN, $s);
-		}
-	}else{
-		setcookie($var, $value, $time, COOKIE_PATH, COOKIE_DOMAIN, $s);
-	}
+    global $_G;
+    $config = $_G['config']['cookie'];
+    
+    $time = $time > 0 ? $time : ($value == '' ? TIME - 3600 : 0);
+    $s = $_SERVER['SERVER_PORT'] == '443' ? 1 : 0;
+    $var = $config['pre'].$var;
+    $_COOKIE[$var] = $value;
+    if(is_array($value)){
+        foreach($value as $k=>$v){
+            setcookie($var.'['.$k.']', $v, $time, $config['path'], $config['domain'], $s);
+        }
+    }else{
+        setcookie($var, $value, $time, $config['path'], $config['domain'], $s);
+    }
 }
 
-function get_cookie($var){
-	$var = COOKIE_PRE.$var;
-	return isset($_COOKIE[$var]) ? $_COOKIE[$var] : false;
+function get_cookie($var, $pre = true){
+    global $_G;
+    $var = $pre ? $_G['config']['cookie']['pre'].$var : $var;
+    return isset($_COOKIE[$var]) ? $_COOKIE[$var] : false;
 }
 
 function is_date($ymd, $sep='-'){
@@ -455,7 +411,7 @@ function string2array($data){
 
 function array2string($data, $isformdata = 1){
 	if($data == '') return '';
-	if($isformdata) $data = new_stripslashes($data);
+	if($isformdata) $data = dstripslashes($data);
 	return addslashes(var_export($data, TRUE));
 }
 
@@ -469,19 +425,32 @@ function hash_string($str){
 function xml_to_array($xml){
 	$array = (array)(simplexml_load_string($xml));
 	foreach ($array as $key=>$item){
-		$array[$key]  = $this->struct_to_array((array)$item);
+		$array[$key]  = xml_to_array((array)$item);
 	}
 	return $array;
 }
 
-/**
-* 可以统计中文字符串长度的函数
-*/
-function abslength($str){
-       $count = 0;
-        $len = strlen($str);
-         for($i=0; $i<$len; $i++,$count++)
-             if(ord($str[$i])>=128)
-                $i++;
-         return $count;
-} 
+//array转为object
+function array2object($array) {
+    if (is_array($array)) {
+        $obj = new StdClass();
+ 
+        foreach ($array as $key => $val){
+            $obj->$key = array2object($val);
+        }
+    }else {
+        $obj = $array;
+    }
+    return $obj;
+}
+
+//object转为array
+function object2array( $object ){
+    if( !is_object( $object ) && !is_array( $object ) ){
+        return $object;
+    }
+    if( is_object( $object ) ){
+        $object = get_object_vars( $object );
+    }
+    return array_map(__FUNCTION__, $object );
+}

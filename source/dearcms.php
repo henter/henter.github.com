@@ -6,9 +6,10 @@ define('IN_DC', true);
 
 define('DS',str_replace("\\", '/', DIRECTORY_SEPARATOR));
 define('DCR', substr(str_replace("\\", '/', dirname(__FILE__)), 0, -6));
-define('DCS',DCR.'source/');
-define('DCD',DCR.'data/');
-define('DCC',DCD.'cache/');
+define('DCS',DCR.'source'.DS);
+define('DCP',DCS.'plugin'.DS);
+define('DCD',DCR.'data'.DS);
+define('DCC',DCD.'cache'.DS);
 define('MICROTIME_START', microtime());
 define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());
 error_reporting(0);
@@ -51,8 +52,16 @@ class dc {
      */
     public static function import($key, $initialize = true){
         //'app','type','name','filepath'
-        @extract(self::lib($key, true));
-
+        //@extract(self::lib($key, true));
+        if(strpos($key,'.')){
+            list($type, $name) = explode('.',$key);
+            if(strpos($type,':')){
+                list($app, $type) = explode(':',$type);
+            }
+        }else{
+            $name = & $key;
+        }
+        
         if(in_array($type, array('class','model','tool'))){
             return self::_loadclass($key, $initialize);
         }else{
@@ -213,25 +222,42 @@ class dearcms{
     }
     
     function __construct(){
-        $this->_init_env();
-        $this->_init_config();
-        $this->_init_input();
-        $this->_init_output();
+        $this->init_env();
+        $this->init_config();
+        $this->init_input();
+        $this->init_output();
     }
     
     function init(){
-        $this->_init_db();
-        $this->_init_dc();
+        //初始化数据库
+        $this->init_db();
+        //加载dc设置
+        $this->init_dc();
+        //加载app
+        import('class.app');
+        //action init
+        do_action('init');
+        
+        
     }
     
-    function _init_env(){
+    function init_env(){
         error_reporting(E_ERROR | E_WARNING | E_PARSE);
 	if(phpversion() < '5.3.0') {
 		set_magic_quotes_runtime(0);
 	}
        //加载核心函数库
        import('global');
-
+       //文件IO工具
+       import('tool.IO');
+       //加载WP函数
+       import('wordpress');
+       //加载hook核心
+       import('hook');
+       //加载KSES函数
+       import('kses');
+       //加载插件函数
+       import('plugin');
 	if(function_exists('ini_get')) {
 		$memorylimit = @ini_get('memory_limit');
 		if($memorylimit && return_bytes($memorylimit) < 33554432 && function_exists('ini_set')) {
@@ -264,11 +290,14 @@ class dearcms{
 	$this->var = & $_G;
     }
     
-    function _init_config() {
+    function init_config() {
        $_config = dc::loadconfig('dearcms');
-    	if(empty($_config)) {
+    	if(!$_config) {
+    		if(!file_exists(DCR.'install/')) {
+    			system_error('缺少安装文件！');
+    		}
     		if(!file_exists(DCD.'./install.lock')) {
-    			header('location: install');
+    			header('location: install/');
     			exit;
     		} else {
     			system_error('缺少配置文件！');
@@ -298,8 +327,9 @@ class dearcms{
         define('URL', SCHEME.$_SERVER['HTTP_HOST'].RELATE_URL);
         define('RELATE_REFERER',urlencode(RELATE_URL));
         define('TIME', time());
+        define('CHARSET', $_config['charset']);
         
-        //下面的设置 可能会在_init_dc里重写覆盖
+        //下面的设置 可能会在init_dc里重写覆盖
     	$this->var['staticurl'] = SITE_URL.'content/static/';
     	$this->var['siteurl'] = SITE_URL;
         
@@ -316,8 +346,10 @@ class dearcms{
         define('TPL_ROOT', DCR.'content'.DS.'template'.DS.$_config['template'].DS); //模板保存物理路径 后面要带‘/’
         define('TPL_CACHEPATH', DCD.'cache_template'.DS.$_config['template'].DS); //模板缓存物理路径
         define('TPL_CACHEPATH_ADMIN', DCD.'cache_template'.DS.'admin'.DS); //模板缓存物理路径
-        define('TPL_TAG_CACHEPATH', DCC.'tpltag'.DS); //模板标签缓存
-            
+        define('TPL_REFRESH', $_config['tplrefresh']); //是否自动刷新模板
+        //加载模板引擎
+        import('template');
+        
         //路由
         $router = import('class.router');
         define('ROUTE_APP', $router->route_app());
@@ -326,7 +358,7 @@ class dearcms{
 
     }
     
-    function _init_input(){
+    function init_input(){
 		if (isset($_GET['GLOBALS']) ||isset($_POST['GLOBALS']) ||  isset($_COOKIE['GLOBALS']) || isset($_FILES['GLOBALS'])) {
 			system_error('request_tainting');
 		}
@@ -338,12 +370,12 @@ class dearcms{
 		}
     }
     
-    function _init_output(){
+    function init_output(){
         header("Content-type:text/html;charset=".$this->var['config']['charset']); 
     }
     
     //数据库
-    function _init_db(){
+    function init_db(){
         if(!$this->dbclass) $this->dbclass = 'db_mysql';
         import('class.db/'.$this->dbclass, true);
         $db = & DB::object($this->dbclass);
@@ -353,12 +385,11 @@ class dearcms{
     }
     
     //设置项
-    function _init_dc(){
+    function init_dc(){
         //$tpldir = dc::option('tpldir');
         
         $this->var['staticurl'] = $this->var['staticurl'] ? $_config['staticurl'] : SITE_URL.'content/static/';
         
-        import('class.app');
     }
 
 }

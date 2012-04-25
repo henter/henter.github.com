@@ -17,14 +17,18 @@ class app{
 
     private function init(){
         $app_obj = $this->load_app($this->app);
-        if (preg_match('/^[_]/i', $this->mod)) {
-            system_error($this->mod.'为内部方法，禁止访问。');
+        //if (preg_match('/^[_]/i', $this->mod)) {
+        if (substr($this->mod,0,1) == '_') {
+            system_error($this->mod.'为'.$this->app.'的内部模块，禁止访问。');
         } else {
-            //如果存在模块方法或魔术方法
-            if (method_exists($app_obj, $this->mod) || method_exists($app_obj, '__call')) {
+            //如果存在模块文件
+            if(file_exists(dc::modpath($this->app.':'.$this->mod))){
+                include dc::modpath($this->app.':'.$this->mod);
+            //如果存在模块方法
+            }elseif(method_exists($app_obj, $this->mod)){
                 call_user_func(array($app_obj, $this->mod));
             }else{
-                system_error($this->mod.'方法不存在。');
+                system_error($this->app.'的'.$this->mod.'模块不存在。');
             }
         }
     }
@@ -56,9 +60,8 @@ class app{
     //自动加载app的模块
     function __call($mod,$arg_array){
         global $_G;
-        
         if(!@include dc::modpath($this->app.':'.$mod)){
-            system_error($mod.'模块文件不存在。');
+            system_error($this->app.' '.$mod.' 模块不存在。');
         }
     }
     

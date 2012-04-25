@@ -1,6 +1,5 @@
 <?php 
-function dir_path($path)
-{
+function dir_path($path){
 	$path = str_replace('\\', '/', $path);
 	if(substr($path, -1) != '/') $path = $path.'/';
 	return $path;
@@ -21,8 +20,7 @@ function dmkdir($dir, $mode = 0777, $makeindex = TRUE){
 	return true;
 }
 
-function dir_create($path, $mode = 0777)
-{
+function dir_create($path, $mode = 0777){
 	if(is_dir($path)) return TRUE;
 
 	$path = dir_path($path);
@@ -39,8 +37,7 @@ function dir_create($path, $mode = 0777)
 	return is_dir($path);
 }
 
-function dir_copy($fromdir, $todir)
-{
+function dir_copy($fromdir, $todir){
 	$fromdir = dir_path($fromdir);
 	$todir = dir_path($todir);
 	if(!is_dir($fromdir)) return FALSE;
@@ -66,8 +63,7 @@ function dir_copy($fromdir, $todir)
     return TRUE;
 }
 
-function dir_iconv($in_charset, $out_charset, $dir, $fileexts = 'php|html|htm|shtml|shtm|js|txt|xml')
-{
+function dir_iconv($in_charset, $out_charset, $dir, $fileexts = 'php|html|htm|shtml|shtm|js|txt|xml'){
 	if($in_charset == $out_charset) return false;
 	$list = dir_list($dir);
 	foreach($list as $v)
@@ -80,8 +76,7 @@ function dir_iconv($in_charset, $out_charset, $dir, $fileexts = 'php|html|htm|sh
 	return true;
 }
 
-function dir_list($path, $exts = '', $list= array())
-{
+function dir_list($path, $exts = '', $list= array()){
 	$path = dir_path($path);
 	$files = glob($path.'*');
 	foreach($files as $v)
@@ -114,8 +109,7 @@ function dir_namelist($path){
 }
 
 
-function dir_touch($path, $mtime = TIME, $atime = TIME)
-{
+function dir_touch($path, $mtime = TIME, $atime = TIME){
 	if(!is_dir($path)) return false;
 	$path = dir_path($path);
 	if(!is_dir($path)) touch($path, $mtime, $atime);
@@ -128,8 +122,7 @@ function dir_touch($path, $mtime = TIME, $atime = TIME)
 }
 
 
-function dir_tree($dir, $parentid = 0, $dirs = array())
-{
+function dir_tree($dir, $parentid = 0, $dirs = array()){
 	global $id;
 	if($parentid == 0) $id = 0;
 	$list = glob($dir.'*');
@@ -145,39 +138,13 @@ function dir_tree($dir, $parentid = 0, $dirs = array())
 	return $dirs;
 }
 
-function dir_delete($dir)
-{
+function dir_delete($dir){
 	$dir = dir_path($dir);
 	if(!is_dir($dir)) return FALSE;
-	$systemdirs = array('', DC_ROOT.'admin/', DC_ROOT.'admin/include/', DC_ROOT.'data/', DC_ROOT.'member/', DC_ROOT.'templates/', DC_ROOT.'images/', DC_ROOT.'inc/', DC_ROOT.'uploadfile/', DC_ROOT.'api/', DC_ROOT.'cp/', DC_ROOT.'shop/');
-	if(substr($dir, 0, 1) == '.' || in_array($dir, $systemdirs)) exit("Cannot remove system dir $dir !");
 	$list = glob($dir.'*');
 	foreach($list as $v)
 	{
 		is_dir($v) ? dir_delete($v) : @unlink($v);
 	}
     return @rmdir($dir);
-}
-
-
-
-//循环删除目录和文件函数
-function del_dir_file($dirName)
-{
-    if($handle = opendir("$dirName")){
-        while (false !== ($item = readdir($handle))){
-            if($item != "." && $item != ".."){
-                if(is_dir("$dirName/$item")){
-                    del_dir_file("$dirName/$item");
-                }else{
-                    //if(unlink("$dirName/$item"))echo "成功删除文件： $dirName/$item<br />\n";
-                    @unlink("$dirName/$item");
-                }
-            }
-        }
-        closedir($handle);
-        //if(rmdir($dirName))echo "成功删除目录： $dirName<br />\n";
-        @rmdir($dirName);
-    }
-    return TRUE;
 }
