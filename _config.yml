@@ -1,1 +1,18 @@
-auto: false
+auto:	          true
+
+markdown:         rdiscount
+pygments:         true
+paginate:         6
+permalink:        /:title
+
+title:            Henter's Blog
+url:              http://blog.henter.me
+feed:             /atom.xml
+author:
+    name:         Henter
+    weibo:      weibo.com/henter
+description:      "Henter\'s Blog"
+author_info:      <a href="http://blog.henter.me/about">Henter</a>
+
+copyright:
+    - Design by <a href="http://henter.me" title="Henter" target="_blank">Henter</a> &copy; Copyright 2012
