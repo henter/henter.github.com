@@ -1,10 +1,9 @@
 <!DOCTYPE html> 
 <html>
 <head>
-<title>Henter</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta name="description" content="henter个人小站。。。" /> 
-<meta name="keywords" content="Henter, Web Developer with PHP at Gaofen.com !" /> 
+<meta name="keywords" content="henter,henterchow" /> 
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
 
@@ -79,6 +78,7 @@ h1{color: #8F0206; font-family: museo-slab,serif;font-weight: 500;line-height: 1
             imgHeight = H.img.height;
             imgWidth = H.img.width;
             resizeWindow();
+            //$('#mycard').css({'opacity':0.8});
             $(H.img).animate({opacity:'toggle'},500);
         }
 
@@ -102,8 +102,19 @@ h1{color: #8F0206; font-family: museo-slab,serif;font-weight: 500;line-height: 1
         }else{
             H.img.onload = imgComplete;
         }
-        
+
         $(window).on('resize',resizeWindow);
+
+        $('#mycard div').on('mouseenter',function(){
+            if(!$(this).hasClass('name')){
+                $(this).addClass('link-hover');
+                $(this).children('.link-info').removeClass('hide').animate({height:'23px'},'fast');
+            }
+        });
+        $('#mycard div').on('mouseleave',function(){
+            $(this).removeClass('link-hover');
+            $(this).children('.link-info').stop().animate({height:'0'});
+        });
     })
 </script>
 
