@@ -1,0 +1,384 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Henter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="generator" content="Jekyll" />
+    <meta name="author" content="Henter" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/henter-diandian.css" type="text/css" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/top.js"></script>
+</head>
+<body>
+
+
+<div id="container" class="clear">
+
+    <div class="left viewport" id="left-cont">
+        <div class="overview" style="left:0;top:0;">
+            
+            <div class="logo">
+                <a href="/">
+                    <span class="logo-mark">
+                        <img src="/images/avatar.jpg" />
+                    </span>
+                </a>
+            </div>
+            
+            <div class="blog-name"><a href="/">Henter</a></div>
+            <p class="blog-desc">
+                RD at <a href="http://zuo.com/@henter" target="_blank">zuo.com</a>
+
+                <br /><br />
+                E-mail: henter@henter.me <br />
+                Weibo: <a href="http://weibo.com/henter" target="_blank">@henter</a>
+            </p>
+            <ul class="nav">
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/atom.xml">RSS</a></li>
+                <li><a href="/archive.html" class="archive">Archive</a></li>
+            </ul>
+
+            <!--
+            <div class="tag">
+                <h3>热门标签</h3>
+                <a href="/?tag=henter" title="henter(25)"><span>henter</span></a><a href="/?tag=%E6%97%85%E6%B8%B8" title="旅游(6)"><span>旅游</span></a><a href="/?tag=%E4%BA%94%E4%B8%80" title="五一(3)"><span>五一</span></a><a href="/?tag=%E6%BC%94%E8%AE%B2" title="演讲(2)"><span>演讲</span></a><a href="/?tag=%E5%A5%A5%E5%B7%B4%E9%A9%AC" title="奥巴马(2)"><span>奥巴马</span></a><a href="/?tag=%E6%9C%AC%E6%8B%89%E7%99%BB" title="本拉登(2)"><span>本拉登</span></a><a href="/?tag=%E7%94%B5%E5%BD%B1" title="电影(2)"><span>电影</span></a><a href="/?tag=%E7%BF%BB%E8%AF%91" title="翻译(2)"><span>翻译</span></a><a href="/?tag=%E4%BC%8A%E6%9C%97" title="伊朗(1)"><span>伊朗</span></a><a href="/?tag=%E5%85%AC%E5%BC%80%E8%AF%BE" title="公开课(1)"><span>公开课</span></a>
+            </div>
+            -->
+            
+            <div class="music">
+                <object type="application/x-shockwave-flash" data="http://x.libdd.com/farm1/082b69/3bc41328/FE257.swf" width="150" height="24" id="fancyplayer" name="fancyplayer">
+                    <param name="wmode" value="transparent"></param>
+                    <param name="movie" value="http://x.libdd.com/farm1/082b69/3bc41328/FE257.swf"></param>
+                    <param name="flashvars" value="mp3=http://a.libdd.com/farm1/19/53EAEE74712880DBF40B0A7915561C13.mp3&amp;"></param>
+                </object>
+            </div>
+            
+            <div id="footer">
+                &copy; Henter <br />
+                2008 - 2013
+            </div>
+
+            <span class="arrow"></span>
+        </div>
+    </div>
+
+    <div class="right">
+        <div class="content">
+            
+	<article class="post fn-clear">
+        <h2 class="post-title"><a href="//2013/03/22/local-webapp-to-the-web-with-dotcloud.html" title="通过dotcloud代替localtunnel建立本地服务器" rel="bookmark">通过dotcloud代替localtunnel建立本地服务器</a></h2>
+        <p class="time"><time pubdate="2013-03-22 00:00:00 +0800">22 Mar 2013</time></p>
+        
+        <p>安装dotcloud cli</p>
+
+<pre><code>sudo easy_install pip &amp;&amp; sudo pip install dotcloud
+
+dotcloud setup
+</code></pre>
+
+<p>PS：我按以上步骤安装完后 <code>dotcloud</code>不能直接用</p>
+
+<p>需要用 <code>/usr/local/share/python/dotcloud</code>代替</p>
+
+<p>当然，你也可以用软链</p>
+
+<pre><code>ln -s /usr/local/share/python/dotcloud /usr/local/bin/dotcloud
+</code></pre>
+
+<p>安装完dotcloud cli工具后，开始建立webapp，以<code>webtunnel</code>为例</p>
+
+<p>先从github clone一个配置</p>
+
+<pre><code>git clone https://github.com/3on/tunnel-on-dotcloud.git
+cd tunnel-on-dotcloud/
+</code></pre>
+
+<p>注：这个repo里面有个地方写错了，默认是无法直接运行的，修改如下</p>
+
+<p>打开 <code>www/nginx.conf</code>文件，在root这一行（第7行）尾部加一个分号<code>;</code></p>
+
+<p>然后</p>
+
+<pre><code>dotcloud create webtunnel
+</code></pre>
+
+<p>这个命令会提示<code>Connect the current directory to "webtunnel"?</code>，是否以当前目录做为app目录
+也可以用下面这个命令手动执行</p>
+
+<pre><code>dotcloud connect webtunnel
+</code></pre>
+
+<p>然后，push到dotcloud服务器</p>
+
+<pre><code>dotcloud push
+</code></pre>
+
+<p>然后打开 http://webtunnel-你的用户名.dotcloud.com</p>
+
+<p>部署成功的话会显示 <code>www/index.html</code>的内容</p>
+
+<pre><code>Grab host url
+
+
+    dotcloud info tunnel.proxy
+</code></pre>
+
+<p>如果提示“Application Not Responding”，表示部署失败，检查问题重新部署。</p>
+
+<p>然后，查看proxy信息</p>
+
+<pre><code>`dotcloud info proxy`
+</code></pre>
+
+<p>过程如下</p>
+
+<pre><code>➜$ dotcloud info proxy
+== proxy
+type:            static
+instances:       1
+reserved memory: N/A
+URLs:
+  - http://webtunnel-henter.dotcloud.com
+
+=== proxy.0
+datacenter:       Amazon-us-east-1d
+service revision: static/da4d1ea2eec9 (latest revision)
+revision:         rsync-1363850353553
+ports:
+  ssh: ssh://dotcloud@webtunnel-henter.azva.dotcloud.net:22481
+</code></pre>
+
+<p>开启本地服务器，如果没安装apache nginx等web服务器，可以用python开启一个简易服务器</p>
+
+<pre><code>$ python -m SimpleHTTPServer
+Serving HTTP on 0.0.0.0 port 8000 ...
+</code></pre>
+
+<p>最后，通过ssh链接dotcloud，注意连接格式把里面的host和8000（本地web服务器端口）改成你自己的。</p>
+
+<pre><code>ssh -i ~/.dotcloud_cli/dotcloud.key -l dotcloud -p 22481 webtunnel-henter.azva.dotcloud.net -R 8042:localhost:8000
+</code></pre>
+
+<p>参考</p>
+
+<pre><code>http://blog.dotcloud.com/open-your-local-webapp-to-the-web-with-dotclo
+https://github.com/3on/tunnel-on-dotcloud
+http://docs.dotcloud.com/guides/flavors/
+http://docs.dotcloud.com/firststeps/install/
+</code></pre>
+
+        
+    </article>
+
+	<article class="post fn-clear">
+        <h2 class="post-title"><a href="//cubieboard/2013/03/21/Cubieboard-test.html" title="Cubieboard开发版测试" rel="bookmark">Cubieboard开发版测试</a></h2>
+        <p class="time"><time pubdate="2013-03-21 21:11:26 +0800">21 Mar 2013</time></p>
+        
+        <p>安装VNC</p>
+
+<pre><code>sudo apt-get install tightvncserver
+</code></pre>
+
+<p>修改xstartup文件</p>
+
+<pre><code>~/.vnc/xstartup
+输入以下内容
+    #!/bin/sh
+    startlubuntu &amp;
+</code></pre>
+
+<p>启动VNC</p>
+
+<pre><code>tightvncserver -geometry 800x600 :1 
+</code></pre>
+
+<p>如果首次启动，输入vncpasswd设置密码</p>
+
+<p>PS：可以将启动命令加入/etc/rc.local开机启动。</p>
+
+<p>关闭VNC</p>
+
+<pre><code>tightvncserver -kill :1
+</code></pre>
+
+<p>安装完后可以直接这Windows下连接VNC（通过VNC Viewer）</p>
+
+        
+    </article>
+
+	<article class="post fn-clear">
+        <h2 class="post-title"><a href="//2013/02/06/try-farbox.html" title="尝试一下FarBox的服务" rel="bookmark">尝试一下FarBox的服务</a></h2>
+        <p class="time"><time pubdate="2013-02-06 00:00:00 +0800">06 Feb 2013</time></p>
+        
+        <p>一直想搭建一个自己的博客，所谓好记性不如烂博客，但是貌似几年过去了，还是不了了之。</p>
+
+<p>分别经历了以下过程：</p>
+
+<pre><code>虚拟主机，安装博客程序
+搭建VPS
+用第三方服务，点点网
+用云平台，新浪SAE
+用Github
+最终，选择了现在的Farbox
+</code></pre>
+
+<p><strong>用虚拟主机</strong></p>
+
+<pre><code>需要自己安装程序，各种配置，修改模板等等
+最蛋疼的是，服务商如果不靠谱，就随时可能杯具，数据都拿不回来。
+</code></pre>
+
+<p><strong>用VPS</strong></p>
+
+<pre><code>除了上面的问题，还要自己配置服务器，做数据备份，小心翼翼。
+</code></pre>
+
+<p><strong>用第三方</strong></p>
+
+<pre><code>不怎么靠谱，能省去上面提到的各种繁琐问题，但是无法充分定制，数据也拿不回来。
+</code></pre>
+
+<p><strong>用云平台</strong></p>
+
+<pre><code>比较靠谱，但是SAE需要云豆支持，虽然不贵，但是万一没云豆了，不续费就会被删掉。
+另外，在本地调试SAE程序也比较蛋疼，需要安装模拟服务器。
+</code></pre>
+
+<p><strong>用Github</strong></p>
+
+<pre><code>靠谱，很多人用这个，我最开始也一直想用。
+优点是可以通过Git发布、免费、平台稳定、可定制模板、可以直接用Markdown写文章、无需数据库等等。
+缺点是，只能是静态页面，不过通过Jekyll配合生成静态页还是很爽的。
+问题也来了，由于需要用到Jekyll（基于Ruby），像我这样目前大多数时间都在Windows平台的用户来说，安装Jeklly还是比较复杂。
+期间甚至想过用PHP来解析Markdown然后生成静态页发布到Git，但是如果这样的话，就又需要面对第1、2种方式的各种问题了。
+</code></pre>
+
+<p><strong>用Farbox</strong></p>
+
+<pre><code>最终，一次偶然的机会，在V2EX发现了Farbox，立马就兴奋了！
+静态页
+无需数据库
+结合云存储平台（Dropbox、快盘）
+定制模板
+简单易用
+</code></pre>
+
+<p>这正是完全符合我需求的博客平台，我自己本身是快盘重度用户，之前在SAE或Github搭建时，程序也都直接放在快盘里，方便同步。
+于是乎，马上注册体验。</p>
+
+<p>不过现在还是发现有些不怎么爽的地方，如</p>
+
+<pre><code>无法本地预览文章
+同步不够及时（即使我手动访问了同步链接）
+</code></pre>
+
+        
+    </article>
+
+	<article class="post fn-clear">
+        <h2 class="post-title"><a href="//2013/02/05/git-rebase.html" title="Git rebase小计(转)" rel="bookmark">Git rebase小计(转)</a></h2>
+        <p class="time"><time pubdate="2013-02-05 00:00:00 +0800">05 Feb 2013</time></p>
+        
+        <p>git rebase，顾名思义，就是重新定义（re）起点（base）的作用，即重新定义分支的版本库状态。要搞清楚这个东西，要先看看版本库状态切换的两种情况：</p>
+
+<p>我们知道，在某个分支上，我们可以通过git reset，实现将当前分支切换到本分支以前的任何一个版本状态，即所谓的“回溯”。即实现了本分支的“后悔药”。也即版本控制系统的初衷。</p>
+
+<p>还有另一种情况，当我们的项目有多个分支的时候。我们除了在本地开发的时候可能会“回溯”外，也常常会将和自己并行开发的别人的分支修改添加到自 己本地来。这种情况下很常见。作为项目管理员，肯定会不断的合并各个子项目的补丁，并将最新版本推送到公共版本库，而作为开发人员之一，提交自己的补丁之 后，往往需要将自己的工作更新到最新的版本库，也就是说把别的分支的工作包含进来。</p>
+
+<p>举个例子来说吧！
+假设我们的项目初期只有一个master分支，然后分支上作过两次提交。这个时候系统只有一个master分支，他的分支历史如下：</p>
+
+<pre><code>master0（初始化后的版本）
+||
+v
+master1（第一次提交后的版本）
+||
+v
+master2（第二次提交后的版本）
+</code></pre>
+
+<p>这个时候，我们可以<strong>通过git reset将master分支</strong>（工作目录、工作缓存或者是版本库）切换到master1或者master0版本，这就是前面所说的第一种情况。
+假设我们这里把master分支通过git reset回溯到了master1状态。那么这个时候系统仍然只有一个master分支，分支的历史如下：</p>
+
+<pre><code>master0（初始化后的版本）
+||
+v
+master1（第一次提交后的版本）
+</code></pre>
+
+<p>然后，我们在这里以master1为起点，创建了另一个分支test。那么对于test分支来说，他的第一个版本test0就和master1是同一个版本，此时项目的分支历史如下：</p>
+
+<pre><code>master0（初始化后的版本）
+||
+v
+master1（第一次提交后的版本）===test0（test分支，初始化自master分支master1状态）
+</code></pre>
+
+<p>这个时候，我们分别对master分支、test分支作两次提交，此时版本库应该成了这个样子：</p>
+
+<pre><code>master0（初始化后的版本）
+||
+v
+master1===test0==&gt;test1===&gt;test2
+||
+v
+master2===&gt;master3
+</code></pre>
+
+<p>这个时候，通过第一种git reset的方式，可以将master分支的当前状态（master3）回溯到master分支的master0、master1、master2状态。 也可已将test分支当前状态（test2）回溯到test分支的test0、test1状态，以及test分支的父分支master的master0、 master1状态。</p>
+
+<p>那么。如果我要让test分支从test0到test2之间所有的改变都添加到master分支来，使得master分支包含test分支的所有修改。这个时候就要用到git rebase了。</p>
+
+<p>首先，我们切换到master分支，然后运行下面的命令，即可实现我们的要求：</p>
+
+<pre><code>git rebase test
+</code></pre>
+
+<p><strong>这个时候，git做了些什么呢？</strong></p>
+
+<pre><code>先将test分支的代码checkout出来，作为工作目录
+然后将master分支从test分支创建起的所有改变的补丁，依次打上。如果打补丁的过程没问题，rebase就搞定了
+
+如果打补丁的时候出现了问题，就会提示你处理冲突。处理好了，可以运行git rebase –continue继续直到完成
+
+如果你不想处理，你还是有两个选择，一个是放弃rebase过程（运行git rebase –abort），另一个是直接用test分支的取代当前分支的（git rebase –skip）。
+</code></pre>
+
+<p>此外，rebase还能够让你修订以前提交，这个功能日后再说。</p>
+
+<p>=======================================</p>
+
+<p>另外，使用git rebase不要滥用，否则会比较麻烦，需要注意的地方参考下面这篇：
+<a href="http://blog.csdn.net/jixiuffff/article/details/5970891">git 关于merge rebase(衍合)</a></p>
+
+<p>转自：
+<a href="http://www.cnblogs.com/kym/archive/2010/08/12/1797937.html">http://www.cnblogs.com/kym/archive/2010/08/12/1797937.html</a></p>
+
+<p>参考：
+<a href="http://ihower.tw/blog/archives/3843/">使用 git rebase 避免無謂的 merge</a>
+<a href="http://blog.csdn.net/jixiuffff/article/details/5970891">git 关于merge rebase(衍合)</a></p>
+
+        
+    </article>
+
+	
+
+            <div class="hr2"></div>
+        </div>
+    </div>
+    
+    <a class="fork-me" href="https://github.com/henter/henter.github.com" target="_blank" rel="nofollow">
+        <img src="images/forkme.png" alt="Fork me on GitHub">
+    </a>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+---
+layout: henter-diandian
+title: Tags
+---
+{% for tag in site.tags %}
+	<a href="" title=""><span>{{ tag | first }}</span></a>
+	{% for post in tag.last %}
+		<a href="{{ site.url }}/{{ post.url }}">{{ post.title }}</a>
+	{% endfor %}
+{% endfor %}

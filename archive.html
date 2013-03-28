@@ -1,0 +1,27 @@
+---
+layout: henter-diandian
+title: Archives
+date: All posts is here.
+---
+<article class="post">
+            <h2>文章存档</h2>
+
+{% for post in site.posts %}
+
+    {% unless post.next %}
+      <h1>{{ post.date | date: '%Y' }}</h1>
+    {% else %}
+      {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+      {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
+      {% if year != nyear %}
+      <br>
+        <h1>{{ post.date | date: '%Y' }}</h1>
+      {% endif %}
+    {% endunless %}
+
+    <li><span class="post_date">{{ post.date | date_to_string }}</span> &raquo; <a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+{% endfor %}
+
+
+            </ul>
+</article>

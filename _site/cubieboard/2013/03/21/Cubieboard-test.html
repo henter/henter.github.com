@@ -1,0 +1,127 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Cubieboard开发版测试 | Henter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="generator" content="Jekyll" />
+    <meta name="author" content="Henter" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/henter-diandian.css" type="text/css" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/top.js"></script>
+</head>
+<body>
+
+
+<div id="container" class="clear">
+
+    <div class="left viewport" id="left-cont">
+        <div class="overview" style="left:0;top:0;">
+            
+            <div class="logo">
+                <a href="/">
+                    <span class="logo-mark">
+                        <img src="/images/avatar.jpg" />
+                    </span>
+                </a>
+            </div>
+            
+            <div class="blog-name"><a href="/">Henter</a></div>
+            <p class="blog-desc">
+                RD at <a href="http://zuo.com/@henter" target="_blank">zuo.com</a>
+
+                <br /><br />
+                E-mail: henter@henter.me <br />
+                Weibo: <a href="http://weibo.com/henter" target="_blank">@henter</a>
+            </p>
+            <ul class="nav">
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/atom.xml">RSS</a></li>
+                <li><a href="/archive.html" class="archive">Archive</a></li>
+            </ul>
+
+            <!--
+            <div class="tag">
+                <h3>热门标签</h3>
+                <a href="/?tag=henter" title="henter(25)"><span>henter</span></a><a href="/?tag=%E6%97%85%E6%B8%B8" title="旅游(6)"><span>旅游</span></a><a href="/?tag=%E4%BA%94%E4%B8%80" title="五一(3)"><span>五一</span></a><a href="/?tag=%E6%BC%94%E8%AE%B2" title="演讲(2)"><span>演讲</span></a><a href="/?tag=%E5%A5%A5%E5%B7%B4%E9%A9%AC" title="奥巴马(2)"><span>奥巴马</span></a><a href="/?tag=%E6%9C%AC%E6%8B%89%E7%99%BB" title="本拉登(2)"><span>本拉登</span></a><a href="/?tag=%E7%94%B5%E5%BD%B1" title="电影(2)"><span>电影</span></a><a href="/?tag=%E7%BF%BB%E8%AF%91" title="翻译(2)"><span>翻译</span></a><a href="/?tag=%E4%BC%8A%E6%9C%97" title="伊朗(1)"><span>伊朗</span></a><a href="/?tag=%E5%85%AC%E5%BC%80%E8%AF%BE" title="公开课(1)"><span>公开课</span></a>
+            </div>
+            -->
+            
+            <div class="music">
+                <object type="application/x-shockwave-flash" data="http://x.libdd.com/farm1/082b69/3bc41328/FE257.swf" width="150" height="24" id="fancyplayer" name="fancyplayer">
+                    <param name="wmode" value="transparent"></param>
+                    <param name="movie" value="http://x.libdd.com/farm1/082b69/3bc41328/FE257.swf"></param>
+                    <param name="flashvars" value="mp3=http://a.libdd.com/farm1/19/53EAEE74712880DBF40B0A7915561C13.mp3&amp;"></param>
+                </object>
+            </div>
+            
+            <div id="footer">
+                &copy; Henter <br />
+                2008 - 2013
+            </div>
+
+            <span class="arrow"></span>
+        </div>
+    </div>
+
+    <div class="right">
+        <div class="content">
+            <article class="post">
+    <h1 class="post-title">Cubieboard开发版测试</h1>
+    <p>安装VNC</p>
+
+<pre><code>sudo apt-get install tightvncserver
+</code></pre>
+
+<p>修改xstartup文件</p>
+
+<pre><code>~/.vnc/xstartup
+输入以下内容
+    #!/bin/sh
+    startlubuntu &amp;
+</code></pre>
+
+<p>启动VNC</p>
+
+<pre><code>tightvncserver -geometry 800x600 :1 
+</code></pre>
+
+<p>如果首次启动，输入vncpasswd设置密码</p>
+
+<p>PS：可以将启动命令加入/etc/rc.local开机启动。</p>
+
+<p>关闭VNC</p>
+
+<pre><code>tightvncserver -kill :1
+</code></pre>
+
+<p>安装完后可以直接这Windows下连接VNC（通过VNC Viewer）</p>
+
+    <nav class="pagination-link">
+        
+        <a class="prev" href="//2013/02/06/try-farbox.html" rel="bookmark">&laquo;&nbsp;尝试一下FarBox的服务</a>
+        
+        
+        <a class="next" href="//2013/03/22/local-webapp-to-the-web-with-dotcloud.html" rel="bookmark">通过dotcloud代替localtunnel建立本地服务器&nbsp;&raquo;</a>
+        
+     </nav>
+     <div id="disqus_thread"></div>
+</article>  
+
+            <div class="hr2"></div>
+        </div>
+    </div>
+    
+    <a class="fork-me" href="https://github.com/henter/henter.github.com" target="_blank" rel="nofollow">
+        <img src="images/forkme.png" alt="Fork me on GitHub">
+    </a>
+
+</div>
+
+</body>
+</html>
