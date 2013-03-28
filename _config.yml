@@ -1,18 +1,36 @@
-auto:	          true
 
+#网站设置 详细https://github.com/mojombo/jekyll/wiki/configuration
 markdown:         rdiscount
 pygments:         true
-paginate:         6
-permalink:        /:title
+paginate:         4
+#permalink: /:year/:month/:day/:title
+permalink: 		  date
 
-title:            Henter's Blog
-url:              http://blog.henter.me
-feed:             /atom.xml
+title:            Henter
+url:              
+feed:             atom.xml
 author:
     name:         Henter
-    weibo:      weibo.com/henter
-description:      "Henter\'s Blog"
-author_info:      <a href="http://blog.henter.me/about">Henter</a>
+    email:        henter@henter.me
+    description:  "The one theme is another web theme design by PIZn."
 
-copyright:
-    - Design by <a href="http://henter.me" title="Henter" target="_blank">Henter</a> &copy; Copyright 2012
+follow:
+    email:        henter@henter.me
+    github:       https://github.com/henter
+    twitter:      http://www.twitter.com/henterchow
+    google:       https://plus.google.com/107483619032085919305
+    facebook:     http://facebook.com/henterchow
+    weibo:     	  http://weibo.com/henter
+
+
+indexContent:     true
+
+
+blogName:         Henter
+blogDesc:         RD at <a href="http://zuo.com/@henter" target="_blank">zuo.com</a>
+favicon:          favicon.ico
+theme:            henter-diandian
+
+disqus:           henter
+
+copyright:        Copyright © 2008-2013 Henter All rights reserved.

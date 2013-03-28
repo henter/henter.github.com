@@ -1,8 +1,3 @@
-# Henter
+###主题介绍
 
-> Henter个人博客，准备搭建于Github，还在测试中。
-> 刚刚搞定linux下的环境～悲催～
-
-## About
-
-http://henter.me
+<a href="http://www.pizn.net/14-11-2012/theone-blog-theme/" title="theOne">Jekyll 博客主题 theOne</a>

@@ -1,123 +1,28 @@
-<!DOCTYPE html> 
-<html>
-<head>
-<title>Henter</title>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta name="description" content="henter个人小站。。。" /> 
-<meta name="keywords" content="Henter, Web Developer with PHP at Gaofen.com !" /> 
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
-
-<style type="text/css">
-body{ font-size: 12px; font-family: Microsoft YaHei ,Arial; color: black;line-height: 1.5; overflow-x:hidden;overflow-y:hidden}
-.henter{margin:100px auto;width:500px;height:300px; border: 1px solid #CCC;padding: 16px 20px 7px;
-background-color:#ccc;position:absolute;top:38.2%;left:40%;margin-left:-250px;margin-top:-100px;opacity:0.8;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=80)";filter:alpha(opacity=80);*padding-bottom:2px;}
-
-.blank { height: 5px; clear: both; overflow: hidden; display: block; }
-
-.sdw{text-shadow: 0 1px 0.5px #CCC;}
-.avatar{float:left;width:120px;}
-.info{width:350px;float:left;}
-
-h1{color: #8F0206; font-family: museo-slab,serif;font-weight: 500;line-height: 1.2;font-size: 32px;text-shadow: 0 2px 2px #CCC;margin: 0 0 22px;}
-.contact span{display:inline-block;width:100px;text-align:right;padding:0 5px;}
-.qr{position:fixed ;margin:-80px 0 0 420px;}
-</style>
-</head>
-<body>
-
-<script type="text/javascript">
-    var H = {};
-    H.images = [
-        'images/bg.png',
-        'images/bg.png',
-        'images/bg.png',
-        'images/daibingfeng.com.jpg',
-        'images/daibingfeng.com.jpg',
-        'http://ww1.sinaimg.cn/large/8b8af2c8gw1do3ek44ojej.jpg',
-        'http://ww1.sinaimg.cn/large/8b8af2c8gw1do3eq6pla4j.jpg',
-        'http://ww3.sinaimg.cn/large/8b8af2c8gw1dnukcrkc1kj.jpg',
-        'http://ww3.sinaimg.cn/large/8b8af2c8gw1dnukdit7vwj.jpg',
-        'http://ww4.sinaimg.cn/large/8b8af2c8gw1dr2tvop10qj.jpg',
-        'http://ww4.sinaimg.cn/large/8b8af2c8gw1dnukdtqx9dj.jpg'
-    ];
-    H.img = new Image();
-    H.img.src = H.images[parseInt(Math.random()*10,10)%9];
-    H.img.id = 'bgImage'
-</script>
-
-<div class='henter'>
-    <div class='head'>
-      <div class='avatar'><img src="http://henter.me/images/henter.jpg" /></div>
-        <div class='info'>
-            <h1>Henter </h1>
-            <p class='address sdw'>Shanghai, China</p>
-            <p class='job sdw'>RD at <a href="http://www.zuo.com/@henter" target="_blank">zuo.com</a></p>
-        </div>
-    </div>
-    <span class='blank'></span>
-    <div class='contact'>
-        <p><span>E-mail</span>: henter@henter.me</p>
-        <p>
-        <span>QQ</span>: <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=511589173&site=qq&menu=yes">henter@henter.me
-        <img style='position:absolute;margin:-5px 0 0 5px;'src="http://wpa.qq.com/pa?p=2:511589173:41 &r=0.6138287724461406" alt="511589173" title="511589173"></a>
-        </p>
-        <p><span>腾讯微博</span>: <a href="http://t.qq.com/henter" target="_blank" >@henter</a>
-
-<iframe style='position:absolute;margin:-5px 0 0 5px;' src="http://follow.v.t.qq.com/index.php?c=follow&a=quick&name=henter&style=5&t=1333089175084&f=0" frameborder="0" scrolling="auto" width="125" height="24" marginwidth="0" marginheight="0" allowtransparency="true"></iframe>
-        </p>
-        <p><span>新浪微博</span>: <a href="http://weibo.com/henter" target="_blank" >@henter</a>
-<iframe style='position:absolute;margin:-5px 0 0 5px;' width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" frameborder="No" border="0" src="http://widget.weibo.com/relationship/followbutton.php?language=zh_cn&width=63&height=24&uid=1649735952&style=1&btn=light&dpc=1"></iframe>
-        </p>
-        <!--
-        <p><a href="http://t.henter.me" target="_blank"><span style="color:red;">同步你妹</span>（微博自动同步工具）</a></p>
-        <p><a href="http://fuckdouban.com" target="_blank" ><span style="color:red;">豆瓣热帖</span>（重口味）</a></p>
-        -->
-
-    </div>
-        
-</div>
-
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        var imgWidth,imgHeight,winWidth,winHeight;
-        var imgComplete = function(){
-            imgHeight = H.img.height;
-            imgWidth = H.img.width;
-            resizeWindow();
-            $(H.img).animate({opacity:'toggle'},500);
-        }
-
-        var resizeWindow = function(){
-            var _width,_height;
-            winHeight = $(document).height();
-            winWidth = $(document).width();
-            _height = imgHeight*winWidth/imgWidth;
-            _width = imgWidth*winHeight/imgHeight;
-            if(_height < winHeight){
-                $('#bgImage').css({'height':winHeight,'width':_width,'left':-(_width-winWidth)*0.5});
-            }else{
-                $('#bgImage').css({'width':winWidth,'height':_height,'left':0});
-            }
-        }
-
-        $(H.img).css({'position':'fixed','top':'0','z-index':'-2','display':'none'});
-        $('body').append(H.img);
-        if(H.img.complete){
-            imgComplete()
-        }else{
-            H.img.onload = imgComplete;
-        }
-        
-        $(window).on('resize',resizeWindow);
-    })
-</script>
-
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F63bcd6253465d79c553673d7f2d28b3d' type='text/javascript'%3E%3C/script%3E"));
-</script>
-
-</body>
-</html>
+---
+layout: henter-diandian
+date: Index
+---
+{% for rpost in paginator.posts %}
+	<article class="post fn-clear">
+        <h2 class="post-title"><a href="{{ site.url }}/{{ rpost.url }}" title="{{ rpost.title }}" rel="bookmark">{{ rpost.title }}</a></h2>
+        <p class="time"><time pubdate="{{ rpost.date }}">{{ rpost.date | date_to_string }}</time></p>
+        {% if site.indexContent == true %}
+        {{ rpost.content }}
+        {% else %}
+        <p>{{ rpost.description }}</p>
+        {% endif %}
+    </article>
+{% endfor %}
+{% if paginator.total_pages > 1 %}
+    <nav id="pagination" class="fn-clear">
+        <ul class="pagination">
+            {% for page in (1..paginator.total_pages) %}
+                {% if page == paginator.page %}
+                    <li class="current"><a href="javascript:void(0);">{{ page }}</a></li>
+                {% else %}
+                    <li><a href="{{ site.url }}/{%if page > 1 %}page{{ page }}/{% endif %}">{{ page }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
+{% endif %}	
