@@ -2,7 +2,7 @@
 date: 2013-03-29 15:55:54
 layout: post
 title: 解决PHP Maximum function nesting level of '100' reached
-tags:php,xdebug
+tags: php,xdebug
 ---
 
 PHP报错 `“Maximum function nesting level of 100 reached”`的解决方法
