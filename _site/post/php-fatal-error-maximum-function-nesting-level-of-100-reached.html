@@ -3,11 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Cubieboard开发版测试 | Henter</title>
+    <title>解决PHP Maximum function nesting level of '100' reached | Henter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="generator" content="Jekyll" />
     <meta name="author" content="Henter" />
-    <meta name="description" content="" />
+    <meta name="keywords" content="henter, henter个人博客" />
+    <meta name="description" content="Henter's personal site, focus on the web." />
     <link rel="stylesheet" href="/css/henter-diandian.css" type="text/css" />
     <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
@@ -41,21 +42,15 @@
             </p>
             <ul class="nav">
                 <li><a href="/about.html">About</a></li>
+                <li><a href="/tags.html">Tags</a></li>
+                <li><a href="/archive.html">Archive</a></li>
                 <li><a href="/atom.xml">RSS</a></li>
-                <li><a href="/archive.html" class="archive">Archive</a></li>
             </ul>
-
-            <!--
-            <div class="tag">
-                <h3>热门标签</h3>
-                <a href="/?tag=henter" title="henter(25)"><span>henter</span></a><a href="/?tag=%E6%97%85%E6%B8%B8" title="旅游(6)"><span>旅游</span></a><a href="/?tag=%E4%BA%94%E4%B8%80" title="五一(3)"><span>五一</span></a><a href="/?tag=%E6%BC%94%E8%AE%B2" title="演讲(2)"><span>演讲</span></a><a href="/?tag=%E5%A5%A5%E5%B7%B4%E9%A9%AC" title="奥巴马(2)"><span>奥巴马</span></a><a href="/?tag=%E6%9C%AC%E6%8B%89%E7%99%BB" title="本拉登(2)"><span>本拉登</span></a><a href="/?tag=%E7%94%B5%E5%BD%B1" title="电影(2)"><span>电影</span></a><a href="/?tag=%E7%BF%BB%E8%AF%91" title="翻译(2)"><span>翻译</span></a><a href="/?tag=%E4%BC%8A%E6%9C%97" title="伊朗(1)"><span>伊朗</span></a><a href="/?tag=%E5%85%AC%E5%BC%80%E8%AF%BE" title="公开课(1)"><span>公开课</span></a>
-            </div>
-            -->
             
             <div class="music">
-                <object type="application/x-shockwave-flash" data="http://x.libdd.com/farm1/082b69/3bc41328/FE257.swf" width="150" height="24" id="fancyplayer" name="fancyplayer">
+                <object type="application/x-shockwave-flash" data="/images/music.swf" width="150" height="24" id="fancyplayer" name="fancyplayer">
                     <param name="wmode" value="transparent"></param>
-                    <param name="movie" value="http://x.libdd.com/farm1/082b69/3bc41328/FE257.swf"></param>
+                    <param name="movie" value="/images/music.swf"></param>
                     <param name="flashvars" value="mp3=http://a.libdd.com/farm1/19/53EAEE74712880DBF40B0A7915561C13.mp3&amp;"></param>
                 </object>
             </div>
@@ -72,42 +67,23 @@
     <div class="right">
         <div class="content">
             <article class="post">
-    <h1 class="post-title">Cubieboard开发版测试</h1>
-    <p>安装VNC</p>
+    <h1 class="post-title">解决PHP Maximum function nesting level of '100' reached</h1>
+    <p>PHP报错 <code>“Maximum function nesting level of 100 reached”</code>的解决方法</p>
 
-<pre><code>sudo apt-get install tightvncserver
+<p>导致报错的原因是：使用递归函数时，递归次数超过了100</p>
+
+<p>实际上这个不是PHP本身的问题，是由于<code>xdebug</code>的默认设置导致的。</p>
+
+<p>解决办法，修改<code>php.ini</code>文件</p>
+
+<pre><code>xdebug.max_nesting_level = 200
 </code></pre>
 
-<p>修改xstartup文件</p>
-
-<pre><code>~/.vnc/xstartup
-输入以下内容
-    #!/bin/sh
-    startlubuntu &amp;
-</code></pre>
-
-<p>启动VNC</p>
-
-<pre><code>tightvncserver -geometry 800x600 :1 
-</code></pre>
-
-<p>如果首次启动，输入vncpasswd设置密码</p>
-
-<p>PS：可以将启动命令加入/etc/rc.local开机启动。</p>
-
-<p>关闭VNC</p>
-
-<pre><code>tightvncserver -kill :1
-</code></pre>
-
-<p>安装完后可以直接这Windows下连接VNC（通过VNC Viewer）</p>
-
+    <div class="tags">phpxdebug</div>
     <nav class="pagination-link">
         
-        <a class="prev" href="//2013/02/06/try-farbox.html" rel="bookmark">&laquo;&nbsp;尝试一下FarBox的服务</a>
+        <a class="prev" href="/post/local-webapp-to-the-web-with-dotcloud.html" rel="bookmark">&laquo;&nbsp;通过dotcloud代替localtunnel建立本地服务器</a>
         
-        
-        <a class="next" href="//2013/03/22/local-webapp-to-the-web-with-dotcloud.html" rel="bookmark">通过dotcloud代替localtunnel建立本地服务器&nbsp;&raquo;</a>
         
      </nav>
      <div id="disqus_thread"></div>
@@ -122,6 +98,11 @@
     </a>
 
 </div>
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F63bcd6253465d79c553673d7f2d28b3d' type='text/javascript'%3E%3C/script%3E"));
+</script>
 
 </body>
 </html>

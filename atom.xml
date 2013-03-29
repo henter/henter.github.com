@@ -5,20 +5,20 @@ layout: nil
 <feed xmlns="http://www.w3.org/2005/Atom">
  
  <title>Henter</title>
- <link href="http://henter.me/atom.xml" rel="self"/>
- <link href="http://henter.me"/>
+ <link href="{{site.prod_url}}/atom.xml" rel="self"/>
+ <link href="{{site.prod_url}}"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
- <id>http://henter.me/</id>
+ <id>{{site.prod_url}}</id>
  <author>
-   <name>Henter</name>
+   <name>{{ site.author.name }}</name>
  </author>
 
  {% for post in site.posts limit: 20 %}
  <entry>
    <title>{{ post.title }}</title>
-   <link href="{{ site.url }}/{{ post.url }}"/>
+   <link href="{{site.prod_url}}/{{ post.url }}"/>
    <updated>{{ post.date | date_to_xmlschema }}</updated>
-   <id>{{ site.url }}{{ post.id }}</id>
+   <id>{{site.prod_url}}/{{ post.id }}</id>
    <content type="html">{{ post.content | xml_escape }}</content>
  </entry>
  {% endfor %}

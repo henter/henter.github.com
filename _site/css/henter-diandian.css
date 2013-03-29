@@ -68,7 +68,7 @@ body {min-height:100%; height:auto !important; min-width: 450px;background:url(i
 
 /* left */
 .left {position:absolute;position:fixed;float:left;display:block; margin-left:-211px; width:211px;}
-.arrow {display:block;position:fixed;top:50%;left:193px;margin-top:-33px;width:50px;height:65px; background:url(images/left_arrow.png) no-repeat 0 0;}
+.arrow {display:block;position:fixed;top:160px;left:193px;margin-top:-33px;width:50px;height:65px; background:url(images/left_arrow.png) no-repeat 0 0;}
 .left ul {list-style:none;}
 
 .logo {position:relative;z-index:1;margin:48px 0 15px 30px;}
@@ -118,7 +118,6 @@ a,.blog-desc a,.nav li a:hover {color:#4691c1}
 .right{background: #FFF;}
 #footer{width:100%; text-align: center;text-shadow: 0 1px 2px #FFF;}
 #totop{font-size: 60px;color:#666;}
-
 
 
 
@@ -502,69 +501,11 @@ h1, h2, h3, h4, h5, h6{ font-weight: 500; color:#333; }
 .fork-me { position: fixed; right: 0; top: 0; z-index: 999; }
 
 
-/*************************
- * custom style
- ************************/
-#red #head-line, #red #foot-line {  background: #f00; }
-#red #logo { background: #ffffda; }
-#red #logo h1,#red #nav a:hover { color: #f00; }
-#red #nav a:hover,#red #nav a.action { border-color: #f00; color:#f00;}
-#red .post blockquote { border-color: #f00;}
-#red .pagination li.current a  { background: #ffffda; color: #f00;}
-#red #J-backTop { color: #f00; }
-#red .post .post-title { background: #ffffda; color: #f00; }
-#red .post .post-title a { color: #f00; }
-
-#orange #head-line, #orange #foot-line {  background: #f2a355; }
-#orange #logo { background: #dff5d2; }
-#orange #logo h1,#orange #nav a:hover { color: #f2a355; }
-#orange #nav a:hover, #orange #nav a.action { border-color: #f2a355; color:#f2a355;}
-#orange .post blockquote { border-color: #f2a355;}
-#orange .pagination li.current a  { background: #dff5d2;  color: #f2a355; }
-#orange #J-backTop { color: #f2a355; }
-#orange .post .post-title { background: #dff5d2; color: #f2a355; }
-#orange .post .post-title a { color: #f2a355; }
-
-#blue #head-line, #blue #foot-line {  background: #4a84d5; }
-#blue #logo { background: #ebf4fa; }
-#blue #logo h1,#blue #nav a:hover { color: #4a84d5; }
-#blue #nav a:hover, #blue #nav a.action { border-color: #4a84d5; color:#4a84d5;}
-#blue .post blockquote { border-color: #4a84d5;}
-#blue .pagination li.current a  { background: #ebf4fa;  color: #4a84d5; }
-#blue #J-backTop { color: #4a84d5; }
-#blue .post .post-title { background: #ebf4fa; color: #4a84d5; }
-#blue .post .post-title a { color: #4a84d5; }
-
-#pink #head-line, #pink #foot-line {  background: #ff4073; }
-#pink #logo { background: #fffff5; }
-#pink #logo h1, #pink #nav a:hover { color: #ff4073; }
-#pink #nav a:hover, #pink #nav a.action { border-color: #ff4073; color:#ff4073;}
-#pink .post blockquote { border-color: #ff4073;}
-#pink .pagination li.current a  { background: #fffff5; color: #ff4073; }
-#pink #J-backTop { color: #ff4073; }
-#pink .post .post-title { background: #fffff5; color: #ff4073; }
-#pink .post .post-title a { color: #ff4073; }
-
-#brown #head-line, #brown #foot-line {  background: #990104; }
-#brown #logo { background: #fdc97d; }
-#brown #logo h1, #brown #nav a:hover { color: #990104; }
-#brown #nav a:hover, #brown #nav a.action { border-color: #990104; color:#990104;}
-#brown .post blockquote { border-color: #990104;}
-#brown .pagination li.current a  { background: #fdc97d; color: #990104; }
-#brown #J-backTop { color: #990104; }
-#brown .post .post-title { background: #fdc97d; color: #990104; }
-#brown .post .post-title a { color: #990104; }
-
-#green #head-line, #green #foot-line {  background: #067d01; }
-#green #logo { background: #fffecb; }
-#green #logo h1, #green #nav a:hover { color: #067d01; }
-#green #nav a:hover, #green #nav a.action { border-color: #067d01; color:#067d01;}
-#green .post blockquote { border-color: #067d01;}
-#green .pagination li.current a  { background: #fffecb; color: #067d01; }
-#green #J-backTop { color: #067d01; }
-#green .post .post-title { background: #fffecb; color: #067d01; }
-#green .post .post-title a { color: #067d01; }
-
+/* tags */
+.tagpage div{width: 70%; font-size: 18px; margin:5px 0 30px 5px;}
+.tagpage div a{ display: inline-block; width:125px; border-bottom: none; height:30px; margin:20px; }
+.tagpage div a:link{ border-bottom: none;}
+.tagpage ul{margin-left: 3em;}
 
 /*************************
  * iPad

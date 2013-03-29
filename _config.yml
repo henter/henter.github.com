@@ -4,15 +4,15 @@ markdown:         rdiscount
 pygments:         true
 paginate:         4
 #permalink: /:year/:month/:day/:title
-permalink: 		  date
+permalink: 		  /post/:title.html
 
 title:            Henter
 url:              
+prod_url:		  http://henter.me
 feed:             atom.xml
 author:
     name:         Henter
     email:        henter@henter.me
-    description:  ""
 
 follow:
     email:        henter@henter.me

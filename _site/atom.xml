@@ -4,18 +4,36 @@
  <title>Henter</title>
  <link href="http://henter.me/atom.xml" rel="self"/>
  <link href="http://henter.me"/>
- <updated>2013-03-29T12:01:04+08:00</updated>
- <id>http://henter.me/</id>
+ <updated>2013-03-29T21:33:56+08:00</updated>
+ <id>http://henter.me</id>
  <author>
    <name>Henter</name>
  </author>
 
  
  <entry>
+   <title>解决PHP Maximum function nesting level of '100' reached</title>
+   <link href="http://henter.me//post/php-fatal-error-maximum-function-nesting-level-of-100-reached.html"/>
+   <updated>2013-03-29T23:55:54+08:00</updated>
+   <id>http://henter.me//post/php-fatal-error-maximum-function-nesting-level-of-100-reached</id>
+   <content type="html">&lt;p&gt;PHP报错 &lt;code&gt;“Maximum function nesting level of 100 reached”&lt;/code&gt;的解决方法&lt;/p&gt;
+
+&lt;p&gt;导致报错的原因是：使用递归函数时，递归次数超过了100&lt;/p&gt;
+
+&lt;p&gt;实际上这个不是PHP本身的问题，是由于&lt;code&gt;xdebug&lt;/code&gt;的默认设置导致的。&lt;/p&gt;
+
+&lt;p&gt;解决办法，修改&lt;code&gt;php.ini&lt;/code&gt;文件&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;xdebug.max_nesting_level = 200
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>通过dotcloud代替localtunnel建立本地服务器</title>
-   <link href="//2013/03/22/local-webapp-to-the-web-with-dotcloud.html"/>
+   <link href="http://henter.me//post/local-webapp-to-the-web-with-dotcloud.html"/>
    <updated>2013-03-22T00:00:00+08:00</updated>
-   <id>/2013/03/22/local-webapp-to-the-web-with-dotcloud</id>
+   <id>http://henter.me//post/local-webapp-to-the-web-with-dotcloud</id>
    <content type="html">&lt;p&gt;安装dotcloud cli&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;sudo easy_install pip &amp;amp;&amp;amp; sudo pip install dotcloud
@@ -118,9 +136,9 @@ http://docs.dotcloud.com/firststeps/install/
  
  <entry>
    <title>Cubieboard开发版测试</title>
-   <link href="//cubieboard/2013/03/21/Cubieboard-test.html"/>
+   <link href="http://henter.me//post/cubieboard-test.html"/>
    <updated>2013-03-21T21:11:26+08:00</updated>
-   <id>/cubieboard/2013/03/21/Cubieboard-test</id>
+   <id>http://henter.me//post/cubieboard-test</id>
    <content type="html">&lt;p&gt;安装VNC&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;sudo apt-get install tightvncserver
@@ -154,9 +172,9 @@ http://docs.dotcloud.com/firststeps/install/
  
  <entry>
    <title>尝试一下FarBox的服务</title>
-   <link href="//2013/02/06/try-farbox.html"/>
+   <link href="http://henter.me//post/try-farbox.html"/>
    <updated>2013-02-06T00:00:00+08:00</updated>
-   <id>/2013/02/06/try-farbox</id>
+   <id>http://henter.me//post/try-farbox</id>
    <content type="html">&lt;p&gt;一直想搭建一个自己的博客，所谓好记性不如烂博客，但是貌似几年过去了，还是不了了之。&lt;/p&gt;
 
 &lt;p&gt;分别经历了以下过程：&lt;/p&gt;
@@ -223,9 +241,9 @@ http://docs.dotcloud.com/firststeps/install/
  
  <entry>
    <title>Git rebase小计(转)</title>
-   <link href="//2013/02/05/git-rebase.html"/>
+   <link href="http://henter.me//post/git-rebase.html"/>
    <updated>2013-02-05T00:00:00+08:00</updated>
-   <id>/2013/02/05/git-rebase</id>
+   <id>http://henter.me//post/git-rebase</id>
    <content type="html">&lt;p&gt;git rebase，顾名思义，就是重新定义（re）起点（base）的作用，即重新定义分支的版本库状态。要搞清楚这个东西，要先看看版本库状态切换的两种情况：&lt;/p&gt;
 
 &lt;p&gt;我们知道，在某个分支上，我们可以通过git reset，实现将当前分支切换到本分支以前的任何一个版本状态，即所谓的“回溯”。即实现了本分支的“后悔药”。也即版本控制系统的初衷。&lt;/p&gt;

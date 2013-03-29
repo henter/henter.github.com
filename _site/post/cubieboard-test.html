@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Henter</title>
+    <title>Cubieboard开发版测试 | Henter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="generator" content="Jekyll" />
     <meta name="author" content="Henter" />
@@ -66,10 +66,48 @@
 
     <div class="right">
         <div class="content">
-            <article class="post fn-clear">
-    <h1>404 Page！</h1>
-    <p>网页未找到！</p>
-</article>
+            <article class="post">
+    <h1 class="post-title">Cubieboard开发版测试</h1>
+    <p>安装VNC</p>
+
+<pre><code>sudo apt-get install tightvncserver
+</code></pre>
+
+<p>修改xstartup文件</p>
+
+<pre><code>~/.vnc/xstartup
+输入以下内容
+    #!/bin/sh
+    startlubuntu &amp;
+</code></pre>
+
+<p>启动VNC</p>
+
+<pre><code>tightvncserver -geometry 800x600 :1 
+</code></pre>
+
+<p>如果首次启动，输入vncpasswd设置密码</p>
+
+<p>PS：可以将启动命令加入/etc/rc.local开机启动。</p>
+
+<p>关闭VNC</p>
+
+<pre><code>tightvncserver -kill :1
+</code></pre>
+
+<p>安装完后可以直接这Windows下连接VNC（通过VNC Viewer）</p>
+
+    <div class="tags">testtest2</div>
+    <nav class="pagination-link">
+        
+        <a class="prev" href="/post/try-farbox.html" rel="bookmark">&laquo;&nbsp;尝试一下FarBox的服务</a>
+        
+        
+        <a class="next" href="/post/local-webapp-to-the-web-with-dotcloud.html" rel="bookmark">通过dotcloud代替localtunnel建立本地服务器&nbsp;&raquo;</a>
+        
+     </nav>
+     <div id="disqus_thread"></div>
+</article>  
 
             <div class="hr2"></div>
         </div>
