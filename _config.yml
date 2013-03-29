@@ -4,17 +4,18 @@ markdown:         rdiscount
 pygments:         true
 paginate:         4
 #permalink: /:year/:month/:day/:title
-permalink: 		  /post/:title.html
+permalink:        /post/:title.html
 
 title:            Henter
 url:              
-prod_url:		  http://henter.me
+prod_url:         http://henter.me
 feed:             atom.xml
 author:
     name:         Henter
     email:        henter@henter.me
 
 follow:
+    email:        henter@henter.me
     github:       https://github.com/henter
     twitter:      http://www.twitter.com/henterchow
     google:       https://plus.google.com/107483619032085919305
@@ -25,8 +26,8 @@ follow:
 indexContent:     true
 
 
-keywords: 		  "henter, henter个人博客"
-description:  	  "Henter's personal site, focus on the web."
+keywords:         "henter, henter个人博客"
+description:      "Henter's personal site, focus on the web."
 
 blogName:         Henter
 blogDesc:         RD at <a href="http://zuo.com/@henter" target="_blank">zuo.com</a>
