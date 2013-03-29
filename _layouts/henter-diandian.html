@@ -8,7 +8,7 @@
     <meta name="generator" content="Jekyll" />
     <meta name="author" content="{{ site.author.name }}" />
     
-    <meta name="keywords" content="{% if page.tags %}{{ page.tags }}{% endif %} {{ site.keywords }}" />
+    <meta name="keywords" content="{% if page.tags %}{% for tag in page.tags %}{{ tag }},{% endfor %}{% endif %} {{ site.keywords }}" />
     <meta name="description" content="{{ site.description }}" />
 
     <link rel="stylesheet" href="{{ site.url }}/css/henter-diandian.css" type="text/css" />

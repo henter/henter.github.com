@@ -1,7 +1,9 @@
 ---
 layout: post
 title: 尝试一下FarBox的服务
-tags: 博客 FarBox
+tags:
+	- 博客
+	- FarBox
 ---
 
 

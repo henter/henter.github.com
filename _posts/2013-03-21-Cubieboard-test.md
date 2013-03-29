@@ -4,7 +4,9 @@ title: Cubieboard开发版测试
 date: 2013-03-21 13:11:26
 category: cubieboard
 published: true
-tags: Cubieboard 开发板
+tags:
+	- Cubieboard
+	- 开发板
 ---
 
 安装VNC
