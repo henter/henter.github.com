@@ -1,8 +1,7 @@
 ---
 layout: post
 title: Git rebase小计(转)
-tags:
-	- git
+tags:git
 ---
 
 git rebase，顾名思义，就是重新定义（re）起点（base）的作用，即重新定义分支的版本库状态。要搞清楚这个东西，要先看看版本库状态切换的两种情况：

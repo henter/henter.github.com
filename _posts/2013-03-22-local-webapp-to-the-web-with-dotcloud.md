@@ -1,10 +1,7 @@
 ---
 layout: post
 title: 通过dotcloud代替localtunnel建立本地服务器
-tags:
-	- dotcloud
-	- localtunnel
-	- 云平台
+tags: dotcloud,localtunnel,云平台
 ---
 
 
