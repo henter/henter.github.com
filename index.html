@@ -6,11 +6,13 @@ date: Index
 	<article class="post fn-clear">
         <h2 class="post-title"><a href="{{ site.url }}{{ rpost.url }}" title="{{ rpost.title }}" rel="bookmark">{{ rpost.title }}</a></h2>
         <p class="time"><time pubdate="{{ rpost.date }}">{{ rpost.date | date_to_string }}</time></p>
+        <div class="post-content">
         {% if site.indexContent == true %}
         {{ rpost.content }}
         {% else %}
         <p>{{ rpost.description }}</p>
         {% endif %}
+        </div>
     </article>
 {% endfor %}
 {% if paginator.total_pages > 1 %}

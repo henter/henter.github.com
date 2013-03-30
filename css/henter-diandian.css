@@ -116,7 +116,7 @@ a,.blog-desc a,.nav li a:hover {color:#4691c1}
 .music {padding:30px 0;}
 
 .right{background: #FFF;}
-#footer{width:100%; text-align: center;text-shadow: 0 1px 2px #FFF;}
+#footer{width:100%; text-align: center;text-shadow: 0 0 10px #FFF;}
 #totop{font-size: 60px;color:#666;}
 
 
@@ -130,7 +130,11 @@ body .fn-hide               { display:none; }
 .fn-right                   { float:right; }
 
 
-article a:link, article a:visited, article a:hover, article a:active, #foot p a, #foot p a:hover, #pagination a:hover { text-decoration: none; border-bottom: 1px solid #ccc; color: black; }
+article a, article a:link, article a.visited, article a:hover, #foot p a, #foot p a:hover, #pagination a:hover { text-decoration: none; border-bottom: 1px solid #ccc; color: black; }
+
+article .post-content a, article p a:link{color: #4691c1;border-bottom: 1px solid #469199;}
+article .post-content a:visited{color: #469199;}
+article .post-content a:hover{color:red;border-bottom: 1px solid red;}
 
 /*  Font Awesome
     the iconic font designed for use with Twitter Bootstrap
@@ -469,7 +473,7 @@ li[class^="icon-"].icon-large:before, li[class*=" icon-"].icon-large:before {
  * Post style
  *************************/
 .post { margin: 40px 0 0px 40px; padding-bottom: 40px; width: auto; border-bottom: 1px dotted #d8d8d8;}
-.post p, .post pre, .post ul, .post ol, .post dl, .post form, .post hr, .post table { margin-bottom: 2em; }
+.post p, .post pre, .post ul, .post ol, .post dl, .post form, .post hr, .post table { margin-bottom: 1em; }
 .post .time { margin-bottom: .5em; color: #d8d8d8; }
 .post blockquote { padding: 0.5em 1em 0.4em 1em; margin-bottom: 1em;  border-left: .9em solid #232323; }
 .post pre { width: 100%; margin-left: 0px; background: #f8f8f8; border-left:  1px solid #d8d8d8; border-top:  1px solid #d8d8d8; border-bottom: 1px solid #d8d8d8; padding: 1em 0 1em 5px; }
@@ -480,9 +484,9 @@ li[class^="icon-"].icon-large:before, li[class*=" icon-"].icon-large:before {
 .post table { width: 680px; }
 
 h1, h2, h3, h4, h5, h6{ font-weight: 500; color:#333; }
-.post h1, .post h2, .post h3, .post h4, .post h5, .post h6 { margin-bottom: 0.4em; line-height: 1.5; }
+.post h1, .post h2, .post h3, .post h4, .post h5, .post h6 { margin-bottom: 0.4em; margin-top: 1em; line-height: 1.5; }
 .post h1 { font-size: 2em; margin-bottom: 1.2em; }
-.post h2 { font-size: 1.8em; margin-bottom: 1em; }
+.post h2 { font-size: 1.8em; margin-bottom: 0em; }
 .post h3 { font-size: 1.4em; border-bottom: 1px dotted #d8d8d8; }
 .post h4 { font-size: 1.2em; }
 .post h5, .post h6 { font-size: 1em; }

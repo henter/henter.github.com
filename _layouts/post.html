@@ -3,7 +3,10 @@ layout: henter-diandian
 ---
 <article class="post">
     <h1 class="post-title">{{ page.title }}</h1>
+    <div class="post-content">
     {{ content }}
+    </div>
+    
     <div class="tags">{{ page.tags }}</div>
     <nav class="pagination-link">
         {% if page.previous %}
