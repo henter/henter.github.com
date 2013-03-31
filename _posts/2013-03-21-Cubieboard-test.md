@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Cubieboard开发版测试
+title: Cubieboard安装VNC
 date: 2013-03-21 13:11:26
 published: true
-tags2: Cubieboard,开发板
-tags: test test2
+tags: Cubieboard
+description: Cubieboard安装VNC测试
 ---
 
 安装VNC
