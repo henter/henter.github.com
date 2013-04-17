@@ -3,11 +3,17 @@ layout: henter-diandian
 ---
 <article class="post">
     <h1 class="post-title">{{ page.title }}</h1>
+    <p class="time"><time pubdate="{{ rpost.date }}">{{ page.date | date_to_string }}</time></p>
     <div class="post-content">
     {{ content }}
     </div>
     
-    <div class="tags">{{ page.tags }}</div>
+    <div class="tags">Tags: 
+        {% for tag in page.tags %}
+        <a href="{{ site.url }}/tags.html#{{ tag }}-ref"><span>{{ tag }}</span></a> 
+        {% endfor %}
+    </div>
+
     <nav class="pagination-link">
         {% if page.previous %}
         <a class="prev" href="{{ site.url }}{{ page.previous.url }}" rel="bookmark">&laquo;&nbsp;{{ page.previous.title | truncatewords:5 }}</a>
