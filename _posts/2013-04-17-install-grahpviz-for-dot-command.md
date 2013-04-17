@@ -2,7 +2,7 @@
 layout: post
 date: 2013-04-17 14:45:19
 title: failed to execute cmd：" dot -Tpng". stderr：`sh： dot：command not found`
-tags: php,xhprof
+tags: php xhprof
 ---
 
 安装完`xhprof`后查看分析结果发现报错如下：
