@@ -92,8 +92,10 @@ PS：
 不习惯命令行的童鞋可以用我前面提到的智能翻墙方案，搜索`mac goagent pac`
 
 
+<br />
+
 参考：
 
-<http://www.1mima.com/mac-os-x%E4%B8%AD%E9%80%9A%E8%BF%87%E7%A8%8B%E5%BA%8F%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE%E7%9A%84proxies/>
+[Mac OS X中通过程序修改系统网络设置的proxies](http://www.1mima.com/mac-os-x%E4%B8%AD%E9%80%9A%E8%BF%87%E7%A8%8B%E5%BA%8F%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE%E7%9A%84proxies/)
 
 <https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man8/networksetup.8.html>
