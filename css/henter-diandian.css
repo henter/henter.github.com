@@ -25,7 +25,7 @@ Version: 20120227
 body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, group, menu, nav, section { margin: 0; padding: 0; }
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
 audio, canvas, video { display: inline-block;  }
-body, button, input, select, textarea { font: 500 14px/1.8 \5FAE\8F6F\96C5\9ED1,\5b8b\4f53,Tahoma, Arial, Helvetica, STHeiti;}
+body, button, input, select, textarea { font: 300 14px/1.8 \5FAE\8F6F\96C5\9ED1,\5b8b\4f53,Tahoma, Arial, Helvetica, STHeiti;}
 /*
 body,button,input,select,textarea{font:12px/1.5 \5FAE\8F6F\96C5\9ED1,\5b8b\4f53,Tahoma, Arial, Helvetica, STHeiti;}
 body, button, input, select, textarea { font: 500 14px/1.8  Georgia, Times, 'Hiragino Sans GB', \u5B8B\u4F53, serif;}
