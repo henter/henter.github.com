@@ -92,6 +92,7 @@ SyntaxError: Non-ASCII character '\xe5' in file
 	print handle.read(maxbytes)
 	
 	读行
+    file(filename)
 	handle.readline(maxbytes)
 	handle.readlines(maxlines)
 	
