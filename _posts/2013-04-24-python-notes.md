@@ -37,7 +37,7 @@ SyntaxError: Non-ASCII character '\xe5' in file
 	str.rtrip()
 	
 	str.replace(old, new[, maxtimes]) 替换
-	str[from, to] 截取
+	str[from:to] 截取
 	
 	'1,2,3,4,5'.split(',') 分割
 	
