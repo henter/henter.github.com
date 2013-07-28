@@ -504,6 +504,8 @@ h1, h2, h3, h4, h5, h6{ font-weight: 500; color:#333; }
 .post .post-title a:hover { border-bottom: 1px dotted #343434; }
 .fork-me { position: fixed; right: 0; top: 0; z-index: 999; }
 
+/* gist */
+.post .gist{width: 690px;}
 
 /* tags */
 .tagpage div{width: 70%; font-size: 18px; margin:5px 0 30px 5px;}
