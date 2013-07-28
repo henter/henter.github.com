@@ -25,9 +25,8 @@ Github上有很多Python实现的APN库，如PyAPNs这类，可以直接用，�
 
 详细：<http://stackoverflow.com/questions/5833642/python-apns-sslerror>
 
-> From within KeyChain export the following both in p12 format, without giving password:
-
 > Apple Development Push Services certificate as cert.p12
+> 
 > primary key under Apple Development Push Services as pkey.p12
 
 
