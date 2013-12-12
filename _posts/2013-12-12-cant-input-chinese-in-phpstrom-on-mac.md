@@ -21,12 +21,19 @@ tags: mac phpstrom jetbrains 工具
 	sudo vim /Applications/PhpStorm.app/bin/idea.vmoptions
 
 在最后一行加上
-	
+
 	-J-Djava.awt.im.style=on-the-spot
-	
+
 
 然后，`Command+Q`完全退出PhpStrom
 
 	切换当前输入法为英文状态
-	
+
 重新启动PhpStrom，OK了，可以正常输入中文。
+
+
+参考：
+
+http://www.blogjava.net/JAVA-HE/archive/2011/11/15/363772.html
+
+https://code.google.com/p/rimeime/issues/detail?id=311
