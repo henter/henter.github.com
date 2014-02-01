@@ -2,7 +2,7 @@
 layout: post
 date: 2013-12-18 15:19:23
 title: Python+RabbitMQ实现多线程APN推送
-description: 用Python实现APN推送
+description: 用Python结合RabbitMQ实现多线程APN推送
 tags: python RibbitMQ APN 推送
 ---
 
