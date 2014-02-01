@@ -72,7 +72,7 @@ SELECT id, ( 6371 * acos( cos( radians(37) ) * cos( radians( lat ) ) * cos( radi
 
 可以将圆形区域抽象为正方形，如下图
 
-![circle-square](pic/geo-circle-square-map.jpg)
+![circle-square](/pic/geo-circle-square-map.jpg)
 
 根据维基百科上的球面计算公式，可以根据圆心坐标计算出正方形四个点的坐标。
 
@@ -358,7 +358,7 @@ $maxDistance距离单位默认为米。举例：
 	
 通过 domain.dev/near 访问，效果如下：
 
-![near](pic/geo-near.png)
+![near](/pic/geo-near.png)
 
 longitude: xxx, latitude: xxx为当前位置，我们在地图上显示了周边100条目标记录
 
@@ -429,7 +429,7 @@ Symfony2演示代码：
 
 通过 domain.dev/box 访问，效果如下：
 
-![box](pic/geo-box.png)
+![box](/pic/geo-box.png)
 
 ###圆形区域
 应用场景有：地图搜索租房信息
@@ -484,7 +484,7 @@ Symfony2演示代码：
 以longitude: xxx，latitude: xxx
 为中心点，半径10km的圆内
 
-![near](pic/geo-center.png)
+![near](/pic/geo-center.png)
 
 ###多边形
 复杂区域内的查询，这个应用场景比较少见。
@@ -541,7 +541,7 @@ Symfony2演示代码（这里为方便，我直接写死了5个坐标点）：
 
 通过 domain.dev/polygon 访问，效果如下：
 
-![polygon](pic/geo-polygon.png)
+![polygon](/pic/geo-polygon.png)
 
 
 
@@ -631,7 +631,7 @@ Symfony2演示代码：
 通过 domian.dev/distance 访问，效果如下：
 距离xxx米
 
-![distance](pic/geo-distance.png)
+![distance](/pic/geo-distance.png)
 
 ##小结
 
