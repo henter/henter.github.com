@@ -1,13 +1,13 @@
 
 #网站设置 详细https://github.com/mojombo/jekyll/wiki/configuration
 markdown:         rdiscount
-pygments:         true
+highlighter:      true
 paginate:         4
 #permalink: /:year/:month/:day/:title
 permalink:        /post/:title.html
 
 title:            Henter
-url:              
+url:
 prod_url:         http://henter.me
 feed:             atom.xml
 author:
