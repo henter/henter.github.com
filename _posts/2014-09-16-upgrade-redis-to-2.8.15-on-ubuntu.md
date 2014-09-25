@@ -23,12 +23,13 @@ wget http://download.redis.io/redis-stable.tar.gz
 tar xvzf redis-stable.tar.gz
 cd redis-stable
 make
+sudo make install
 ```
 
 拷贝文件到原来的位置（懒得改init脚本）
 
 ```
-cp src/redis-* /usr/bin/
+sudo cp /usr/local/bin/redis-* /usr/bin/
 ```
 
 然后修改配置文件（aof bind daemon等等）。
