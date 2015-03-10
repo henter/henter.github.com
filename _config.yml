@@ -1,7 +1,7 @@
 
 #网站设置 详细https://github.com/mojombo/jekyll/wiki/configuration
 markdown:         rdiscount
-highlighter:      true
+highlighter:      pygments
 paginate:         4
 #permalink: /:year/:month/:day/:title
 permalink:        /post/:title.html
