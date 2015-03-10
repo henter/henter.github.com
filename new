@@ -1,0 +1,9 @@
+#!/usr/bin/ruby
+
+require 'rake'
+title = ARGV.first
+if title
+  sh "rake new_post[#{title}]"
+else
+  puts "please input post title, ./new title"
+end

@@ -1,0 +1,10 @@
+GEM
+  remote: https://ruby.taobao.org/
+  specs:
+    stringex (2.5.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  stringex (~> 2.5.2)
