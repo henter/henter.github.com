@@ -48,4 +48,4 @@ BSD
 
 
 源码：
-![ReactNativeRubyChina](https://github.com/henter/ReactNativeRubyChina)
+[https://github.com/henter/ReactNativeRubyChina](https://github.com/henter/ReactNativeRubyChina)
