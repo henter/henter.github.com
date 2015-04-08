@@ -45,3 +45,7 @@ kimino请求速度很慢，等rubychina哪天再开放API了再切换过来～
 
 BSD
 
+
+
+源码：
+![ReactNativeRubyChina](https://github.com/henter/ReactNativeRubyChina)
