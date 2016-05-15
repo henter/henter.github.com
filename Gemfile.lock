@@ -1,5 +1,5 @@
 GEM
-  remote: https://ruby.taobao.org/
+  remote: https://gems.ruby-china.org/
   specs:
     stringex (2.5.2)
 

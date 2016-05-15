@@ -1,3 +1,3 @@
-source 'https://ruby.taobao.org'
+source 'https://gems.ruby-china.org'
 
 gem 'stringex', '~> 2.5.2'
