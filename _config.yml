@@ -6,6 +6,8 @@ paginate:         4
 #permalink: /:year/:month/:day/:title
 permalink:        /post/:title.html
 
+gems: [jekyll-paginate]
+
 title:            Henter
 url:
 prod_url:         http://henter.me
