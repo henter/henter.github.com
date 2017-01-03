@@ -1,43 +1,36 @@
-
 #网站设置 详细https://github.com/mojombo/jekyll/wiki/configuration
-markdown:         kramdown
-highlighter:      pygments
-paginate:         4
+markdown: kramdown
+highlighter: pygments
+paginate: 4
 #permalink: /:year/:month/:day/:title
-permalink:        /post/:title.html
+permalink: /post/:title.html
 
 gems: [jekyll-paginate]
 
-title:            Henter
+title: Henter
 url:
-prod_url:         http://henter.me
-feed:             atom.xml
+prod_url: http://henter.me
+feed: atom.xml
 author:
-    name:         Henter
-    email:        henter@henter.me
+    name: Henter
+    email: henter@henter.me
 
 follow:
-    email:        henter@henter.me
-    github:       https://github.com/henter
-    twitter:      https://www.twitter.com/henterchow
-    google:       https://plus.google.com/107483619032085919305
-    facebook:     https://facebook.com/henterchow
-    weibo:     	  http://weibo.com/henter
+    email: henter@henter.me
+    github: https://github.com/henter
+    twitter: https://www.twitter.com/henterchow
+    google: https://plus.google.com/107483619032085919305
+    facebook: https://facebook.com/henterchow
+    weibo: http://weibo.com/henter
 
+indexContent: true
 
-indexContent:     true
+keywords: "henter, henter个人博客"
+description: "Henter's personal site, focus on the web."
 
-
-keywords:         "henter, henter个人博客"
-description:      "Henter's personal site, focus on the web."
-
-blogName:         Henter
-blogDesc:         <br />Shanghai, China
-favicon:          favicon.ico
-theme:            henter-diandian
-
-disqus:           henter
-
-copyright:        Copyright © 2008-2013 Henter All rights reserved.
-
-music:            http://a.libdd.com/farm1/19/53EAEE74712880DBF40B0A7915561C13.mp3
+blogName: Henter
+blogDesc: <br />Shanghai, China
+favicon: favicon.ico
+theme: henter-diandian
+disqus: henter
+copyright: Copyright © 2008-2013 Henter All rights reserved.
