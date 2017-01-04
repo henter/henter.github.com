@@ -21,17 +21,17 @@ kimino请求速度很慢，等rubychina哪天再开放API了再切换过来～
 
 ### 部分截图
 ##### 首页
-![home](http://henter.qiniudn.com/ios/home.png)
+![home](https://static.appcute.im/ios/home.png)
 
 ##### 分类节点
-![nodes](http://henter.qiniudn.com/ios/nodes.png)
+![home](https://static.appcute.im/ios/nodes.png)
 
 ##### 主题详细页
-![topic](http://henter.qiniudn.com/ios/topic.png)
+![home](https://static.appcute.im/ios/topic.png)
 
 
 #### 关于
-![about](http://henter.qiniudn.com/ios/about.png)
+![home](https://static.appcute.im/ios/about.png)
 
 
 
