@@ -9,7 +9,7 @@ gems: [jekyll-paginate]
 
 title: Henter
 url:
-prod_url: http://henter.me
+prod_url: https://henter.me
 feed: atom.xml
 author:
     name: Henter
