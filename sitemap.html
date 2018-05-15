@@ -2,6 +2,6 @@
 title : Sitemap
 ---
 {% for page in site.pages %}
-{{site.prod_url}}/{{ page.url }}{% endfor %}
+{{site.url}}/{{ page.url }}{% endfor %}
 {% for post in site.posts %}
-{{site.prod_url}}/{{ post.url }}{% endfor %}
+{{site.url}}/{{ post.url }}{% endfor %}

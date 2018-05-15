@@ -8,8 +8,7 @@ permalink: /post/:title.html
 gems: [jekyll-paginate]
 
 title: Henter
-url:
-prod_url: https://henter.me
+url: https://henter.me
 feed: atom.xml
 author:
     name: Henter
