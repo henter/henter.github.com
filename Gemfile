@@ -1,4 +1,4 @@
-source 'https://gems.ruby-china.org'
+source 'https://gems.ruby-china.com'
 
 gem 'stringex', '~> 2.5.2'
 gem 'jekyll', '~> 3.1.3'
